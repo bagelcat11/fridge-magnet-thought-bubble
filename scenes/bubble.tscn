@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://bm3kj1wr3vtt7"]
+
+[ext_resource type="Script" uid="uid://cthrjmy3aa4ib" path="res://scripts/bubble.gd" id="1_pm753"]
+[ext_resource type="Texture2D" uid="uid://bjd81ne80g4u" path="res://icon.svg" id="2_b4vvx"]
+[ext_resource type="PackedScene" uid="uid://bpn5dtoyqv8uv" path="res://scenes/word.tscn" id="3_b4vvx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lc0bl"]
+size = Vector2(761, 183)
+
+[node name="bubble" type="Node2D"]
+script = ExtResource("1_pm753")
+
+[node name="word_area" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="word_area"]
+position = Vector2(565.5, 195.5)
+shape = SubResource("RectangleShape2D_lc0bl")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(564, 194.5)
+scale = Vector2(6.15625, 1.53906)
+texture = ExtResource("2_b4vvx")
+
+[node name="word" parent="." instance=ExtResource("3_b4vvx")]
+position = Vector2(111, 67)
+
+[node name="word2" parent="." instance=ExtResource("3_b4vvx")]
+position = Vector2(735, 56)
+
+[node name="word3" parent="." instance=ExtResource("3_b4vvx")]
+position = Vector2(509, 59)
+
+[connection signal="area_entered" from="word_area" to="." method="_on_word_area_area_entered"]
+[connection signal="area_exited" from="word_area" to="." method="_on_word_area_area_exited"]
