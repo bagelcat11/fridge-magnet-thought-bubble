@@ -37,4 +37,4 @@ script = ExtResource("1_dqkch")
 
 [node name="forms" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_smehm")
-animation = &"temp_fumoball_default"
+animation = &"temp_fumo2"

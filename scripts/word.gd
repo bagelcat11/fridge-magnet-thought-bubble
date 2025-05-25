@@ -10,11 +10,13 @@ var myAttributes = []
 var timeSinceLastInteract = 0.0
 var hasMouse = false
 var isPickedUp = false
+var isInBubble = false
 var pickupOffset = Vector2.ZERO
 var sizeScaleWhenPickedUp = 1.2
 
 func _ready() -> void:
 	var c = rng.randf()
+	$Timer.start(Globals.wordTimerTime)
 	if c <= chanceForObject:
 		isObject = true
 	else:
@@ -42,8 +44,11 @@ func _input(event: InputEvent) -> void:
 			# drop shadow also??
 			pickupOffset = get_global_position() - get_global_mouse_position()
 			self.scale = Vector2(sizeScaleWhenPickedUp, sizeScaleWhenPickedUp)
+			$Timer.stop()
 		else:
 			self.scale = Vector2(1, 1)
+			if (!isInBubble):
+				$Timer.start(Globals.wordTimerTime)
 
 func _physics_process(delta: float) -> void:
 	if isPickedUp:
@@ -66,3 +71,8 @@ func _on_fridge_magnet_mouse_entered() -> void:
 func _on_fridge_magnet_mouse_exited() -> void:
 	hasMouse = false
 	#print("no more mouse :/")
+
+
+func _on_timer_timeout() -> void:
+	#delete word
+	self.queue_free()

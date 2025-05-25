@@ -1,11 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://dcpjx25fo6rxo"]
+[gd_scene load_steps=4 format=3 uid="uid://dcpjx25fo6rxo"]
 
+[ext_resource type="Script" uid="uid://bdla10o6f8jed" path="res://scripts/level_manager.gd" id="1_6we3w"]
 [ext_resource type="PackedScene" uid="uid://bm3kj1wr3vtt7" path="res://scenes/bubble.tscn" id="1_ufxs0"]
 [ext_resource type="PackedScene" uid="uid://bod7r823y2ysu" path="res://scenes/player.tscn" id="2_6we3w"]
 
 [node name="main_level" type="Node2D"]
+script = ExtResource("1_6we3w")
 
 [node name="bubble" parent="." instance=ExtResource("1_ufxs0")]
 
 [node name="player" parent="." instance=ExtResource("2_6we3w")]
 position = Vector2(1001, 722)
+
+[node name="WordTimer" type="Timer" parent="."]
+
+[connection signal="timeout" from="WordTimer" to="." method="_on_word_timer_timeout"]

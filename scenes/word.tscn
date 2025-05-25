@@ -47,5 +47,9 @@ position = Vector2(-5.96046e-08, -7.56979e-06)
 scale = Vector2(1, 0.320313)
 texture = ExtResource("1_ar2rp")
 
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+
 [connection signal="mouse_entered" from="fridge_magnet" to="." method="_on_fridge_magnet_mouse_entered"]
 [connection signal="mouse_exited" from="fridge_magnet" to="." method="_on_fridge_magnet_mouse_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

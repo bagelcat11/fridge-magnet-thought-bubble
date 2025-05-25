@@ -21,6 +21,8 @@ func _on_word_area_area_entered(area: Area2D) -> void:
 	if area.collision_layer == 2:
 		var mag = area.get_parent()
 		whoIsInBubble.append(mag)
+		mag.isInBubble = true
+		#mag.get_node("Timer").stop()
 		#print("currently have: " + str(whoIsInBubble))
 		if mag.isObject:
 			formStack.append(mag.myAttributes)
@@ -39,6 +41,7 @@ func _on_word_area_area_exited(area: Area2D) -> void:
 	if area.collision_layer == 2:
 		var mag = area.get_parent()
 		whoIsInBubble.erase(mag)
+		mag.isInBubble = false
 		#print("currently have: " + str(whoIsInBubble))
 		if mag.isObject:
 			formStack.erase(mag.myAttributes)
