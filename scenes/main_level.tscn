@@ -1,12 +1,23 @@
-[gd_scene load_steps=6 format=3 uid="uid://dcpjx25fo6rxo"]
+[gd_scene load_steps=8 format=3 uid="uid://dcpjx25fo6rxo"]
 
 [ext_resource type="Script" uid="uid://bdla10o6f8jed" path="res://scripts/level_manager.gd" id="1_6we3w"]
 [ext_resource type="PackedScene" uid="uid://bm3kj1wr3vtt7" path="res://scenes/bubble.tscn" id="1_ufxs0"]
 [ext_resource type="PackedScene" uid="uid://bod7r823y2ysu" path="res://scenes/player.tscn" id="2_6we3w"]
 [ext_resource type="Shader" uid="uid://tj43wxvr837l" path="res://shaders/test.gdshader" id="4_8ra5a"]
+[ext_resource type="Shader" uid="uid://b6t8pog534fnq" path="res://shaders/test2.gdshader" id="5_8ra5a"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_k5pu3"]
 shader = ExtResource("4_8ra5a")
+shader_parameter/rotation = 3.0
+shader_parameter/color_gap = Vector4(0.25, 0, 0, 0)
+shader_parameter/color_stripe = Vector4(1, 0, 1, 0.2)
+shader_parameter/divisions = 16.0
+shader_parameter/stripe_bias = 1.5
+shader_parameter/speed = 0.05
+shader_parameter/angle = 0.3
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bq26l"]
+shader = ExtResource("5_8ra5a")
 shader_parameter/rotation = 3.0
 shader_parameter/color_gap = Vector4(0.25, 0, 0, 0)
 shader_parameter/color_stripe = Vector4(1, 0, 1, 0.2)
@@ -29,6 +40,13 @@ position = Vector2(1001, 722)
 [node name="screenshader" type="ColorRect" parent="."]
 z_index = 9
 material = SubResource("ShaderMaterial_k5pu3")
+offset_right = 1920.0
+offset_bottom = 1080.0
+mouse_filter = 2
+
+[node name="screenshader2" type="ColorRect" parent="."]
+z_index = 9
+material = SubResource("ShaderMaterial_bq26l")
 offset_right = 1920.0
 offset_bottom = 1080.0
 mouse_filter = 2
