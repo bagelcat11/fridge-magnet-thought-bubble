@@ -4,7 +4,10 @@ var whoIsInBubble = []
 #var currentObject
 var formStack = []
 
-var default_form = ["temp_fumoball_default", false]
+var default_form = Globals.objects[0]
+
+signal _get_up()
+signal _scroll_background(speed: float)
 
 #var currentHeldMagnet = null
 
@@ -24,18 +27,33 @@ func _on_word_area_area_entered(area: Area2D) -> void:
 		mag.isInBubble = true
 		#mag.get_node("Timer").stop()
 		#print("currently have: " + str(whoIsInBubble))
-		if mag.isObject:
-			formStack.append(mag.myAttributes)
+		if (Globals.stage == 0):
+			#do funny move word things in here:
+			#TODO: play animation when word is put in bubble (shake anim or smth)
+			#if all move words are in bubble (TODO: make words not spawn multiple times)
+			if (whoIsInBubble.size() == Globals.move_words.size()):
+				#get up
+				_get_up.emit()
+				#clear all words from bubble
+				whoIsInBubble = []
+				#clear all words from tree
+				for word in get_tree().get_nodes_in_group("words"):
+					word.queue_free()
+		elif (Globals.stage == 1 || Globals.stage == 2):
+			if mag.isObject:
+				formStack.append(mag.myAttributes)
 
-		if formStack.size() > 0:
-			#print("going to emit: ", formStack[-1], " of type ", typeof(formStack[-1]))
-			Globals.change_form.emit(formStack[-1])
-			#Globals.emit_signal("change_form", formStack[-1])
-			#print("changing form to ", formStack[-1])
-			#print("THIS IS AFTER THE THING IS EMITTED")
-		else:	
-			Globals.change_form.emit(default_form)
-			#print("changing form to ", default_form)
+			if formStack.size() > 0:
+				#print("going to emit: ", formStack[-1], " of type ", typeof(formStack[-1]))
+				Globals.change_form.emit(formStack[-1])
+				_scroll_background.emit(formStack[-1][1]) #change bc scroll speed
+				#Globals.emit_signal("change_form", formStack[-1])
+				#print("changing form to ", formStack[-1])
+				#print("THIS IS AFTER THE THING IS EMITTED")
+			else:	
+				Globals.change_form.emit(default_form)
+				_scroll_background.emit(default_form[1]) #change bc scroll speed
+				#print("changing form to ", default_form)
 
 func _on_word_area_area_exited(area: Area2D) -> void:
 	if area.collision_layer == 2:
@@ -43,12 +61,15 @@ func _on_word_area_area_exited(area: Area2D) -> void:
 		whoIsInBubble.erase(mag)
 		mag.isInBubble = false
 		#print("currently have: " + str(whoIsInBubble))
-		if mag.isObject:
-			formStack.erase(mag.myAttributes)
+		if (Globals.stage == 1 || Globals.stage == 2):
+			if mag.isObject:
+				formStack.erase(mag.myAttributes)
 
-		if formStack.size() > 0:
-			Globals.change_form.emit(formStack[-1])
-			#print("changing form to ", formStack[-1])
-		else:
-			Globals.change_form.emit(default_form)
-			#print("changing form to ", default_form)
+			if formStack.size() > 0:
+				Globals.change_form.emit(formStack[-1])
+				_scroll_background.emit(formStack[-1][1]) #change bc scroll speed
+				#print("changing form to ", formStack[-1])
+			else:
+				Globals.change_form.emit(default_form)
+				_scroll_background.emit(default_form[1]) #change bc scroll speed
+				#print("changing form to ", default_form)
