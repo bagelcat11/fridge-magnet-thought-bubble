@@ -26,5 +26,11 @@ func _on_forms_animation_finished() -> void:
 	if ($forms.animation == "person_getting_up"):
 		$forms.play("person_walking")
 		_start_stage_1.emit()
-		print("start stage 1 signal emitted")
+		#print("start stage 1 signal emitted")
 		
+
+
+func _on_main_level__send_player_home() -> void:
+	$forms.flip_h = true
+	$forms.play("person_walking")
+	#print("going home")

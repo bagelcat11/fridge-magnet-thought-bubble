@@ -8,6 +8,7 @@ var default_form = Globals.objects[0]
 
 signal _get_up()
 signal _scroll_background(speed: float)
+signal _go_home()
 
 #var currentHeldMagnet = null
 
@@ -40,6 +41,10 @@ func _on_word_area_area_entered(area: Area2D) -> void:
 				for word in get_tree().get_nodes_in_group("words"):
 					word.queue_free()
 		elif (Globals.stage == 1 || Globals.stage == 2):
+			if mag.isGoHomeWord:
+				_go_home.emit()
+				#print("go home signal emitted")
+				return
 			if mag.isObject:
 				formStack.append(mag.myAttributes)
 
@@ -68,8 +73,8 @@ func _on_word_area_area_exited(area: Area2D) -> void:
 			if formStack.size() > 0:
 				Globals.change_form.emit(formStack[-1])
 				_scroll_background.emit(formStack[-1][1]) #change bc scroll speed
-				#print("changing form to ", formStack[-1])
+				print("changing form to ", formStack[-1])
 			else:
 				Globals.change_form.emit(default_form)
 				_scroll_background.emit(default_form[1]) #change bc scroll speed
-				#print("changing form to ", default_form)
+				print("changing form to ", default_form)
