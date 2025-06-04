@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dcpjx25fo6rxo"]
+[gd_scene load_steps=15 format=3 uid="uid://dcpjx25fo6rxo"]
 
 [ext_resource type="Script" uid="uid://bdla10o6f8jed" path="res://scripts/level_manager.gd" id="1_6we3w"]
 [ext_resource type="PackedScene" uid="uid://bm3kj1wr3vtt7" path="res://scenes/bubble.tscn" id="1_ufxs0"]
@@ -6,8 +6,21 @@
 [ext_resource type="PackedScene" uid="uid://dwoodyqrbkxhj" path="res://scenes/end.tscn" id="2_k5pu3"]
 [ext_resource type="Shader" uid="uid://tj43wxvr837l" path="res://shaders/test.gdshader" id="4_8ra5a"]
 [ext_resource type="Shader" uid="uid://b6t8pog534fnq" path="res://shaders/test2.gdshader" id="5_8ra5a"]
+[ext_resource type="Shader" uid="uid://bap8ab725qnga" path="res://shaders/fog.gdshader" id="5_iqu8w"]
 [ext_resource type="Texture2D" uid="uid://dlj3otsvjpi1n" path="res://assets/outside_background.png" id="6_bq26l"]
 [ext_resource type="Texture2D" uid="uid://dbof1uhyni8mm" path="res://assets/temp_room_asset.jpg" id="7_u2c82"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5fr2l"]
+shader = ExtResource("5_iqu8w")
+shader_parameter/base_color = Color(1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_2sb77"]
+frequency = 0.0063
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_fkrx8"]
+seamless = true
+normalize = false
+noise = SubResource("FastNoiseLite_2sb77")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_k5pu3"]
 shader = ExtResource("4_8ra5a")
@@ -42,6 +55,13 @@ z_index = -1
 position = Vector2(1001, 722)
 
 [node name="word_timer" type="Timer" parent="."]
+
+[node name="fogshader" type="TextureRect" parent="."]
+texture_repeat = 2
+material = SubResource("ShaderMaterial_5fr2l")
+offset_right = 1920.0
+offset_bottom = 1080.0
+texture = SubResource("NoiseTexture2D_fkrx8")
 
 [node name="screenshader" type="ColorRect" parent="."]
 visible = false
