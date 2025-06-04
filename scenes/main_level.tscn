@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://bdla10o6f8jed" path="res://scripts/level_manager.gd" id="1_6we3w"]
 [ext_resource type="PackedScene" uid="uid://bm3kj1wr3vtt7" path="res://scenes/bubble.tscn" id="1_ufxs0"]
 [ext_resource type="PackedScene" uid="uid://bod7r823y2ysu" path="res://scenes/player.tscn" id="2_6we3w"]
+[ext_resource type="PackedScene" uid="uid://dwoodyqrbkxhj" path="res://scenes/end.tscn" id="2_k5pu3"]
 [ext_resource type="Shader" uid="uid://tj43wxvr837l" path="res://shaders/test.gdshader" id="4_8ra5a"]
 [ext_resource type="Shader" uid="uid://b6t8pog534fnq" path="res://shaders/test2.gdshader" id="5_8ra5a"]
 [ext_resource type="Shader" uid="uid://dhaq3wb7hnr2l" path="res://shaders/woozy1.gdshader" id="6_bq26l"]
@@ -12,6 +13,8 @@
 [ext_resource type="Shader" uid="uid://7i7hkrs2wla2" path="res://shaders/crunchy2.gdshader" id="10_5fr2l"]
 [ext_resource type="Shader" uid="uid://x2itvbge8psn" path="res://shaders/mystery.gdshader" id="11_2sb77"]
 [ext_resource type="Shader" uid="uid://rgur1qn8jee2" path="res://shaders/mystery2.gdshader" id="12_fkrx8"]
+[ext_resource type="Texture2D" uid="uid://dlj3otsvjpi1n" path="res://assets/outside_background.png" id="6_bq26l"]
+[ext_resource type="Texture2D" uid="uid://dbof1uhyni8mm" path="res://assets/temp_room_asset.jpg" id="7_u2c82"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_k5pu3"]
 shader = ExtResource("4_8ra5a")
@@ -88,13 +91,16 @@ shader_parameter/num_of_layers = 40
 [node name="main_level" type="Node2D"]
 script = ExtResource("1_6we3w")
 
+[node name="end" parent="." instance=ExtResource("2_k5pu3")]
+visible = false
+
 [node name="bubble" parent="." instance=ExtResource("1_ufxs0")]
 z_index = -1
 
 [node name="player" parent="." instance=ExtResource("2_6we3w")]
 position = Vector2(1001, 722)
 
-[node name="WordTimer" type="Timer" parent="."]
+[node name="word_timer" type="Timer" parent="."]
 
 [node name="screenshader" type="ColorRect" parent="."]
 visible = false
@@ -154,4 +160,38 @@ material = SubResource("ShaderMaterial_adxub")
 offset_right = 1934.0
 offset_bottom = 1105.0
 
-[connection signal="timeout" from="WordTimer" to="." method="_on_word_timer_timeout"]
+[node name="background" type="ParallaxBackground" parent="."]
+scroll_offset = Vector2(1, 0)
+scroll_base_offset = Vector2(1, 0)
+scroll_ignore_camera_zoom = true
+
+[node name="outside_parallax2d" type="Parallax2D" parent="background"]
+repeat_size = Vector2(2170.44, 0)
+autoscroll = Vector2(100, 0)
+ignore_camera_scroll = true
+
+[node name="sprite" type="Sprite2D" parent="background/outside_parallax2d"]
+scale = Vector2(1.06, 1.06)
+texture = ExtResource("6_bq26l")
+offset = Vector2(1024, 512)
+
+[node name="inside_parallax2d" type="Parallax2D" parent="background"]
+visible = false
+ignore_camera_scroll = true
+
+[node name="sprite" type="Sprite2D" parent="background/inside_parallax2d"]
+position = Vector2(-1340.53, -592.256)
+scale = Vector2(2.24968, 2.24968)
+texture = ExtResource("7_u2c82")
+offset = Vector2(1024, 512)
+
+[node name="end_timer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="_send_player_home" from="." to="player" method="_on_main_level__send_player_home"]
+[connection signal="_get_up" from="bubble" to="player" method="_get_up"]
+[connection signal="_go_home" from="bubble" to="." method="_go_home"]
+[connection signal="_scroll_background" from="bubble" to="." method="_scroll_background"]
+[connection signal="_start_stage_1" from="player" to="." method="_start_stage_1"]
+[connection signal="timeout" from="word_timer" to="." method="_on_word_timer_timeout"]
+[connection signal="timeout" from="end_timer" to="." method="_on_end_timer_timeout"]

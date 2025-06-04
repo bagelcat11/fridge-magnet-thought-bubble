@@ -1,12 +1,84 @@
-[gd_scene load_steps=6 format=3 uid="uid://bod7r823y2ysu"]
+[gd_scene load_steps=19 format=3 uid="uid://bod7r823y2ysu"]
 
 [ext_resource type="Script" uid="uid://bh4ppn2ksqwp8" path="res://scripts/player.gd" id="1_dqkch"]
+[ext_resource type="Texture2D" uid="uid://cd8i5r6blewy3" path="res://assets/person/getting_up/Person_Getting_Up1.png" id="2_4r5pv"]
 [ext_resource type="Texture2D" uid="uid://ds4076s7cdevd" path="res://assets/tmp/bakaminorikofumo.png" id="2_qlg0r"]
+[ext_resource type="Texture2D" uid="uid://bgldo7bk1ykwb" path="res://assets/person/getting_up/Person_Getting_Up2.png" id="3_60mlk"]
 [ext_resource type="Texture2D" uid="uid://je5lijssbdxd" path="res://assets/tmp/bakaShizuhafumo.png" id="3_tuyoq"]
 [ext_resource type="Texture2D" uid="uid://cemssar5v804f" path="res://assets/tmp/touhou_enemy.png" id="4_fjrip"]
+[ext_resource type="Texture2D" uid="uid://dc12ttit6k8y3" path="res://assets/person/getting_up/Person_Getting_Up3.png" id="4_i4ail"]
+[ext_resource type="Texture2D" uid="uid://d16un6qcfvotn" path="res://assets/person/getting_up/Person_Getting_Up4.png" id="5_a38lo"]
+[ext_resource type="Texture2D" uid="uid://clff4grj862t6" path="res://assets/person/getting_up/Person_Getting_Up5.png" id="6_4ni07"]
+[ext_resource type="Texture2D" uid="uid://msqhb71oghay" path="res://assets/person/getting_up/Person_Getting_Up6.png" id="7_l71n6"]
+[ext_resource type="Texture2D" uid="uid://cbh3d8u2lgwbt" path="res://assets/person/lying_down/Person_Lying_Down1.png" id="8_ke2ow"]
+[ext_resource type="Texture2D" uid="uid://diev2ypq0ntru" path="res://assets/person/lying_down/Person_Lying_Down2.png" id="9_ujl30"]
+[ext_resource type="Texture2D" uid="uid://ish8oa3ojsng" path="res://assets/person/stand/Person_Standing1.png" id="10_31cv2"]
+[ext_resource type="Texture2D" uid="uid://dnpseoyymm8hd" path="res://assets/person/stand/Person_Standing2.png" id="11_pf23h"]
+[ext_resource type="Texture2D" uid="uid://bfcptywn13rpg" path="res://assets/person/walk/Person_Walk1.png" id="12_dt7fs"]
+[ext_resource type="Texture2D" uid="uid://crlm3axowc7ey" path="res://assets/person/walk/Person_Walk4.png" id="15_gl8cc"]
+[ext_resource type="Texture2D" uid="uid://dusaeoppldt8s" path="res://assets/person/walk/Person_Walk5.png" id="16_487ah"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_smehm"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_4r5pv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_60mlk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_i4ail")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_a38lo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_4ni07")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_l71n6")
+}],
+"loop": false,
+"name": &"person_getting_up",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_ke2ow")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_ujl30")
+}],
+"loop": true,
+"name": &"person_lying",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_31cv2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_pf23h")
+}],
+"loop": true,
+"name": &"person_standing",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("12_dt7fs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_487ah")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_gl8cc")
+}],
+"loop": true,
+"name": &"person_walking",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("2_qlg0r")
@@ -37,4 +109,8 @@ script = ExtResource("1_dqkch")
 
 [node name="forms" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_smehm")
-animation = &"temp_fumo2"
+animation = &"person_walking"
+frame = 1
+frame_progress = 0.600502
+
+[connection signal="animation_finished" from="forms" to="." method="_on_forms_animation_finished"]

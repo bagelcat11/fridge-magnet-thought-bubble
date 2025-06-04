@@ -13,25 +13,34 @@ var isPickedUp = false
 var isInBubble = false
 var pickupOffset = Vector2.ZERO
 var sizeScaleWhenPickedUp = 1.2
+var isGoHomeWord = false
 
 func _ready() -> void:
 	var c = rng.randf()
-	$Timer.start(Globals.wordTimerTime)
-	if c <= chanceForObject:
-		isObject = true
-	else:
-		isObject = false
+	if (Globals.stage == 0):
+		c = rng.randi_range(0, Globals.move_words.size() - 1)
+		myAttributes = Globals.move_words[c]
+	elif (Globals.stage == 2 && !Globals.goHomeWordSpawned):
+		Globals.goHomeWordSpawned = true
+		myAttributes = Globals.go_home_word
+		isGoHomeWord = true
+	elif (Globals.stage == 1 || Globals.stage == 2):
+		$Timer.start(Globals.wordTimerTime)
+		if c <= chanceForObject:
+			isObject = true
+		else:
+			isObject = false
 
-	if isObject:
-		# get random object from list
-		c = rng.randi_range(0, Globals.objects.size() - 1)
-		myAttributes = Globals.objects[c]
-	else:
-		# get random feeling
-		c = rng.randi_range(0, Globals.feelings.size() - 1)
-		myAttributes = Globals.feelings[c]
-	
-	$name.text = myAttributes[0]
+		if isObject:
+			# get random object from list
+			c = rng.randi_range(0, Globals.objects.size() - 1)
+			myAttributes = Globals.objects[c]
+		else:
+			# get random feeling
+			c = rng.randi_range(0, Globals.feelings.size() - 1)
+			myAttributes = Globals.feelings[c]
+	if (myAttributes.size() > 0):
+		$name.text = myAttributes[0]
 	
 	spawn_in_anim()
 
@@ -44,10 +53,11 @@ func _input(event: InputEvent) -> void:
 			# drop shadow also??
 			pickupOffset = get_global_position() - get_global_mouse_position()
 			self.scale = Vector2(sizeScaleWhenPickedUp, sizeScaleWhenPickedUp)
-			$Timer.stop()
+			if (Globals.stage == 1 || (Globals.stage == 2 && !isGoHomeWord)):
+				$Timer.stop()
 		else:
 			self.scale = Vector2(1, 1)
-			if (!isInBubble):
+			if (!isInBubble && (Globals.stage == 1 || (Globals.stage == 2 && !isGoHomeWord))):
 				$Timer.start(Globals.wordTimerTime)
 
 func _physics_process(delta: float) -> void:
