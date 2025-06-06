@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://bod7r823y2ysu"]
+[gd_scene load_steps=22 format=3 uid="uid://bod7r823y2ysu"]
 
 [ext_resource type="Script" uid="uid://bh4ppn2ksqwp8" path="res://scripts/player.gd" id="1_dqkch"]
 [ext_resource type="Texture2D" uid="uid://cd8i5r6blewy3" path="res://assets/person/getting_up/Person_Getting_Up1.png" id="2_4r5pv"]
@@ -104,13 +104,54 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="Animation" id="Animation_qfm1y"]
+resource_name = "hop"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("forms:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5),
+"transitions": PackedFloat32Array(0.3, 3, 3),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -40), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_fulsm"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("forms:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4r5pv"]
+_data = {
+&"RESET": SubResource("Animation_fulsm"),
+&"hop": SubResource("Animation_qfm1y")
+}
+
 [node name="player" type="Node2D"]
 script = ExtResource("1_dqkch")
 
 [node name="forms" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_smehm")
-animation = &"person_walking"
-frame = 1
-frame_progress = 0.600502
+animation = &"temp_fumo1"
+
+[node name="hop_animator" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_4r5pv")
+}
 
 [connection signal="animation_finished" from="forms" to="." method="_on_forms_animation_finished"]

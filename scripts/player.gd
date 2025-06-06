@@ -16,6 +16,10 @@ func change(form: Array):
 	#print("trying to play ", form[0])
 	$forms.play(form[0])
 	#print("playing ", $forms.animation)
+	if $forms.get_sprite_frames().get_frame_count($forms.animation) == 1:
+		$hop_animator.play("hop")
+	else:
+		$hop_animator.stop()
 
 
 func _get_up() -> void:
