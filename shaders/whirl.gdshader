@@ -27,7 +27,7 @@ void fragment() {
 	// WHIRL
 	vec2 uv = SCREEN_UV;
 	vec2 rel = uv - vec2(0.5, 0.5);
-	float whirl_angle = length(rel) * rotation * TIME / 55.0;
+	float whirl_angle = length(rel) * rotation;
 	mat2 rot = mat2(vec2(cos(whirl_angle), -sin(whirl_angle)), vec2(sin(whirl_angle), cos(whirl_angle)));
 	rel = rot * rel;
 	uv = clamp(rel + vec2(0.5,0.5), vec2(0.0, 0.0), vec2(1.0, 1.0));
