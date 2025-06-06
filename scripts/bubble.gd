@@ -4,7 +4,7 @@ var whoIsInBubble = []
 #var currentObject
 var formStack = []
 
-var default_form = Globals.objects[0]
+var default_form = Globals.default_obj
 
 signal _get_up()
 signal _scroll_background(speed: float)
@@ -48,17 +48,17 @@ func _on_word_area_area_entered(area: Area2D) -> void:
 			if mag.isObject:
 				formStack.append(mag.myAttributes)
 
-			if formStack.size() > 0:
-				#print("going to emit: ", formStack[-1], " of type ", typeof(formStack[-1]))
-				Globals.change_form.emit(formStack[-1])
-				_scroll_background.emit(formStack[-1][1]) #change bc scroll speed
-				#Globals.emit_signal("change_form", formStack[-1])
-				#print("changing form to ", formStack[-1])
-				#print("THIS IS AFTER THE THING IS EMITTED")
-			else:	
-				Globals.change_form.emit(default_form)
-				_scroll_background.emit(default_form[1]) #change bc scroll speed
-				#print("changing form to ", default_form)
+				if formStack.size() > 0:
+					#print("going to emit: ", formStack[-1], " of type ", typeof(formStack[-1]))
+					Globals.change_form.emit(formStack[-1])
+					_scroll_background.emit(formStack[-1][1]) #change bc scroll speed
+					#Globals.emit_signal("change_form", formStack[-1])
+					#print("changing form to ", formStack[-1])
+					#print("THIS IS AFTER THE THING IS EMITTED")
+				else:	
+					Globals.change_form.emit(default_form)
+					_scroll_background.emit(default_form[1]) #change bc scroll speed
+					#print("changing form to ", default_form)
 
 func _on_word_area_area_exited(area: Area2D) -> void:
 	if area.collision_layer == 2:
@@ -70,11 +70,11 @@ func _on_word_area_area_exited(area: Area2D) -> void:
 			if mag.isObject:
 				formStack.erase(mag.myAttributes)
 
-			if formStack.size() > 0:
-				Globals.change_form.emit(formStack[-1])
-				_scroll_background.emit(formStack[-1][1]) #change bc scroll speed
-				print("changing form to ", formStack[-1])
-			else:
-				Globals.change_form.emit(default_form)
-				_scroll_background.emit(default_form[1]) #change bc scroll speed
-				print("changing form to ", default_form)
+				if formStack.size() > 0:
+					Globals.change_form.emit(formStack[-1])
+					_scroll_background.emit(formStack[-1][1]) #change bc scroll speed
+					print("changing form to ", formStack[-1])
+				else:
+					Globals.change_form.emit(default_form)
+					_scroll_background.emit(default_form[1]) #change bc scroll speed
+					print("changing form to ", default_form)

@@ -137,11 +137,13 @@ offset_right = 1946.0
 offset_bottom = 1107.0
 
 [node name="ColorRect" type="ColorRect" parent="."]
+visible = false
 material = SubResource("ShaderMaterial_mwgft")
 offset_right = 1925.0
 offset_bottom = 1096.0
 
 [node name="ColorRect2" type="ColorRect" parent="."]
+visible = false
 material = SubResource("ShaderMaterial_adxub")
 offset_right = 1934.0
 offset_bottom = 1105.0

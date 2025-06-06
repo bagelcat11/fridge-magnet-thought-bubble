@@ -16,6 +16,10 @@ func change(form: Array):
 	#print("trying to play ", form[0])
 	$forms.play(form[0])
 	#print("playing ", $forms.animation)
+	if $forms.get_sprite_frames().get_frame_count($forms.animation) == 1:
+		$hop_animator.play("hop")
+	else:
+		$hop_animator.stop()
 
 
 func _get_up() -> void:
@@ -32,5 +36,6 @@ func _on_forms_animation_finished() -> void:
 
 func _on_main_level__send_player_home() -> void:
 	$forms.flip_h = true
-	$forms.play("person_walking")
+	change(Globals.default_obj)
+	#$forms.play("person_walking")
 	#print("going home")

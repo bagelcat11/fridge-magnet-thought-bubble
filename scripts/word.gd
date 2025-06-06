@@ -2,7 +2,7 @@ extends Node2D
 
 # implicit opposite: isFeeling
 var isObject
-var chanceForObject = 0.5
+var chanceForObject = 0.75
 var rng = RandomNumberGenerator.new()
 
 var myAttributes = []
@@ -40,7 +40,10 @@ func _ready() -> void:
 			c = rng.randi_range(0, Globals.feelings.size() - 1)
 			myAttributes = Globals.feelings[c]
 	if (myAttributes.size() > 0):
-		$name.text = myAttributes[0]
+		if isObject:
+			$name.text = myAttributes[2]
+		else:
+			$name.text = myAttributes[0]
 	
 	spawn_in_anim()
 

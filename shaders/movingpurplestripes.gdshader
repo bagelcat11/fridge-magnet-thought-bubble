@@ -23,6 +23,15 @@ void vertex() {
 
 void fragment() {
 	// Called for every pixel the material is visible on.
+
+	
+	// MOVING STRIPES
+	float w = cos(angle) * UV.x + sin(angle) * UV.y - speed * TIME;
+	if (floor(mod(w * divisions, stripe_bias)) < 0.0001) {
+		COLOR = color_gap;
+	} else {
+		COLOR = color_stripe;
+	}
 	
 	// WHIRL
 	//vec2 uv = SCREEN_UV;
@@ -32,14 +41,6 @@ void fragment() {
 	//rel = rot * rel;
 	//uv = clamp(rel + vec2(0.5,0.5), vec2(0.0, 0.0), vec2(1.0, 1.0));
 	//COLOR.rgb = textureLod(screen_texture, uv, 0.0).rgb;
-	
-	// MOVING STRIPES
-	float w = cos(angle) * UV.x + sin(angle) * UV.y - speed * TIME;
-	if (floor(mod(w * divisions, stripe_bias)) < 0.0001) {
-		COLOR = color_gap;
-	} else {
-		COLOR = color_stripe;
-	}
 
 }
 
