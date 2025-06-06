@@ -36,5 +36,6 @@ func _on_forms_animation_finished() -> void:
 
 func _on_main_level__send_player_home() -> void:
 	$forms.flip_h = true
-	$forms.play("person_walking")
+	change(Globals.default_obj)
+	#$forms.play("person_walking")
 	#print("going home")

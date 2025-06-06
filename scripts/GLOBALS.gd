@@ -9,31 +9,32 @@ var walkTime = 10.0 #in seconds (will be longer, short for testing)
 var endDelayTime = 3.0 #in seconds (delay after go home before game ends)
 var goHomeWordSpawned = false
 
+var default_obj = ["person_walking", defaultScrollSpeed, "Person"]
+
 var objects = [
-	# [ string ObjectName, float bgScrollSpeed (px/s) ]
-	["person_walking", defaultScrollSpeed],
-	["temp_fumo1", -100],
-	["temp_fumo2", -200],
-	["alien", defaultScrollSpeed],
-	["apple", defaultScrollSpeed],
-	["bed", defaultScrollSpeed],
-	["book", defaultScrollSpeed],
-	["boots", defaultScrollSpeed],
-	["bow", defaultScrollSpeed],
-	["bowling", defaultScrollSpeed],
-	["boxers", defaultScrollSpeed],
-	["chair", defaultScrollSpeed],
-	["earth", defaultScrollSpeed],
-	["flower", defaultScrollSpeed],
-	["frog_table", defaultScrollSpeed],
-	["hockey_stick", defaultScrollSpeed],
-	["homework", defaultScrollSpeed],
-	["inchworm", defaultScrollSpeed],
-	["meat", defaultScrollSpeed],
-	["mirror", defaultScrollSpeed],
-	["mouse_bike", defaultScrollSpeed],
-	["propeller_hat", defaultScrollSpeed],
-	["undergarments", defaultScrollSpeed]
+	# [ string ObjectName, float bgScrollSpeed (px/s), string DisplayName]
+	#["temp_fumo1", -100, ""],
+	#["temp_fumo2", -200, ""],
+	["alien", defaultScrollSpeed, "Alien"],
+	["apple", defaultScrollSpeed, "Apple"],
+	["bed", defaultScrollSpeed, "Bed"],
+	["book", defaultScrollSpeed, "Book"],
+	["boots", defaultScrollSpeed, "Boots"],
+	["bow", defaultScrollSpeed, "Bow"],
+	["bowling", defaultScrollSpeed, "Bowling"],
+	["boxers", defaultScrollSpeed, "Boxers"],
+	["chair", defaultScrollSpeed, "Chair"],
+	["earth", defaultScrollSpeed, "Earth"],
+	["flower", defaultScrollSpeed, "Flower"],
+	["frog_table", defaultScrollSpeed, "Table"],
+	["hockey_stick", defaultScrollSpeed, "Hockey"],
+	["homework", defaultScrollSpeed, "Homework"],
+	["inchworm", defaultScrollSpeed, "Inchworm"],
+	["meat", defaultScrollSpeed, "Dinner"],
+	["mirror", defaultScrollSpeed, "Mirror"],
+	["mouse_bike", defaultScrollSpeed, "Bike"],
+	["propeller_hat", defaultScrollSpeed, "Hat"],
+	["undergarments", defaultScrollSpeed, "Underwear"]
 	
 	#["temp_fumoball_default", false]
 ]
@@ -44,9 +45,9 @@ var feelings = [
 ]
 
 var move_words = [
-	["get up"],
-	["move"],
-	["go"]
+	["Get up"],
+	["Move"],
+	["Go"]
 ]
 
-var go_home_word = ["go home"]
+var go_home_word = ["Go home"]

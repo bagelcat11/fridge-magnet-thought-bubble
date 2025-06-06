@@ -4,7 +4,7 @@ var whoIsInBubble = []
 #var currentObject
 var formStack = []
 
-var default_form = Globals.objects[0]
+var default_form = Globals.default_obj
 
 signal _get_up()
 signal _scroll_background(speed: float)
