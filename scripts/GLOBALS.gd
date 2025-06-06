@@ -13,7 +13,27 @@ var objects = [
 	# [ string ObjectName, float bgScrollSpeed (px/s) ]
 	["person_walking", defaultScrollSpeed],
 	["temp_fumo1", -100],
-	["temp_fumo2", -200]
+	["temp_fumo2", -200],
+	["alien", defaultScrollSpeed],
+	["apple", defaultScrollSpeed],
+	["bed", defaultScrollSpeed],
+	["book", defaultScrollSpeed],
+	["boots", defaultScrollSpeed],
+	["bow", defaultScrollSpeed],
+	["bowling", defaultScrollSpeed],
+	["boxers", defaultScrollSpeed],
+	["chair", defaultScrollSpeed],
+	["earth", defaultScrollSpeed],
+	["flower", defaultScrollSpeed],
+	["frog_table", defaultScrollSpeed],
+	["hockey_stick", defaultScrollSpeed],
+	["homework", defaultScrollSpeed],
+	["inchworm", defaultScrollSpeed],
+	["meat", defaultScrollSpeed],
+	["mirror", defaultScrollSpeed],
+	["mouse_bike", defaultScrollSpeed],
+	["propeller_hat", defaultScrollSpeed],
+	["undergarments", defaultScrollSpeed]
 	
 	#["temp_fumoball_default", false]
 ]
