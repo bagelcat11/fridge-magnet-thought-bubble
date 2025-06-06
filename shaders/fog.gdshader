@@ -8,7 +8,7 @@ void fragment() {
 	vec3 fog_color_1 = texture(TEXTURE, vec2(UV.x/2.0 + TIME/100.0, UV.y/4.0 - TIME/100.0)).rgb;
 	vec3 fog_color_2 = texture(TEXTURE, vec2(UV.x/2.0 + 0.5 + TIME/50.0, UV.y/4.0 + 0.5 - TIME/160.0)).rgb;
 	vec3 fog_color_3 = texture(TEXTURE, vec2(UV.x/2.0 + 0.25 + TIME/100.0, UV.y/4.0 - 0.25 - TIME/160.0)).rgb;
-	
+
 	vec3 fog_color = mix(fog_color_3, mix(fog_color_1, fog_color_2, 0.5), 0.7);
 	//vec3 fog_color = mix(fog_color_1, fog_color_3, 0.5);
 	//vec3 fog_color = fog_color_1;
@@ -16,7 +16,7 @@ void fragment() {
 
 	COLOR.a *= base_color.a * fog_color.r;
 	COLOR.rgb = fog_color * base_color.rgb * 1.7;
-	
+
 }
 
 //void light() {
