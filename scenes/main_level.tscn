@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://dcpjx25fo6rxo"]
+[gd_scene load_steps=19 format=3 uid="uid://dcpjx25fo6rxo"]
 
 [ext_resource type="Script" uid="uid://bdla10o6f8jed" path="res://scripts/level_manager.gd" id="1_6we3w"]
 [ext_resource type="PackedScene" uid="uid://bm3kj1wr3vtt7" path="res://scenes/bubble.tscn" id="1_ufxs0"]
@@ -9,6 +9,7 @@
 [ext_resource type="Shader" uid="uid://bap8ab725qnga" path="res://shaders/fog.gdshader" id="5_iqu8w"]
 [ext_resource type="Shader" uid="uid://cqagjepa5marq" path="res://shaders/rain.gdshader" id="6_5fr2l"]
 [ext_resource type="Texture2D" uid="uid://dlj3otsvjpi1n" path="res://assets/outside_background.png" id="6_bq26l"]
+[ext_resource type="Shader" uid="uid://wo5wo0r0xf37" path="res://shaders/chromatic_aberration.gdshader" id="7_2sb77"]
 [ext_resource type="Texture2D" uid="uid://dbof1uhyni8mm" path="res://assets/temp_room_asset.jpg" id="7_u2c82"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5fr2l"]
@@ -26,11 +27,16 @@ noise = SubResource("FastNoiseLite_2sb77")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2sb77"]
 shader = ExtResource("6_5fr2l")
 shader_parameter/count = 150
-shader_parameter/slant = -0.01
-shader_parameter/speed = 50.0
+shader_parameter/speed = 25.0
 shader_parameter/blur = 0.002
 shader_parameter/colour = Color(1, 1, 1, 1)
-shader_parameter/size = Vector2(0.005, 0.2)
+shader_parameter/size = Vector2(0.007, 0.2)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fkrx8"]
+shader = ExtResource("7_2sb77")
+shader_parameter/r_displacement = Vector2(3, 0)
+shader_parameter/g_displacement = Vector2(0, 0)
+shader_parameter/b_displacement = Vector2(-3, 0)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_k5pu3"]
 shader = ExtResource("4_8ra5a")
@@ -72,6 +78,7 @@ texture_repeat = 2
 material = SubResource("ShaderMaterial_5fr2l")
 offset_right = 1920.0
 offset_bottom = 1080.0
+mouse_filter = 2
 texture = SubResource("NoiseTexture2D_fkrx8")
 
 [node name="rain_shader" type="ColorRect" parent="."]
@@ -79,6 +86,13 @@ visible = false
 material = SubResource("ShaderMaterial_2sb77")
 offset_right = 1920.0
 offset_bottom = 1080.0
+mouse_filter = 2
+
+[node name="chromatic_aberration_shader" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_fkrx8")
+offset_right = 1920.0
+offset_bottom = 1080.0
+mouse_filter = 2
 
 [node name="screenshader" type="ColorRect" parent="."]
 visible = false

@@ -2,11 +2,11 @@ shader_type canvas_item;
 
 // can make snow by adjusting values
 uniform int count: hint_range(0, 2000) = 150;
-uniform float slant: hint_range(-0.1, 0.1) = -0.01;
-uniform float speed: hint_range(25.0, 100.0) = 50.0;
+//uniform float slant: hint_range(-0.1, 0.1) = -0.01;
+uniform float speed: hint_range(25.0, 100.0) = 25.0;
 uniform float blur: hint_range(0.0005, 0.1) = 0.002;
 uniform vec4 colour: source_color = vec4(1.0, 1.0, 1.0, 1.0);
-uniform vec2 size = vec2(0.01, 0.2);
+uniform vec2 size = vec2(0.007, 0.2);
 
 float line_sdf(vec2 p, vec2 s) {
     vec2 d = abs(p) - s;
@@ -28,7 +28,7 @@ void fragment() {
     float time = TIME + 1000.0;
     vec2 uv = UV;
 	// slant each line left or right
-    uv.x += uv.y * slant;
+    //uv.x += uv.y * slant;
     float output = 0.0;
 
     for (int i = 1; i <= count; i++) {
@@ -36,13 +36,13 @@ void fragment() {
         float h2 = Hash2(float(i));
 		// make it so the lines move in the direction of the slant as well
 		// otherwise they would go directly down no matter what slant is
-        float sl = h1 * uv.y * -slant;
+        //float sl = h1 * uv.y * -slant;
 		// compute random x position of line, multiply by 1.2 to cover the far edges more predictably
         float pos_mod_x = h1 * 1.2;
 		// there is probably better way to do this, to prevent line from moving too slow compared to other lines
-        float pos_mod_y = max(h2 * speed, pos_mod_x * speed);
+        float pos_mod_y = (0.5 + h2) * speed;
 		// wrap y values around to loop the anim
-        vec2 position = vec2(pos_mod_x + sl, -mod(-pos_mod_y * time * 0.1, -1.));
+        vec2 position = vec2(pos_mod_x, -mod(-pos_mod_y * time * 0.1, -1.));
         float sdf = line_sdf(uv - position, s);
         output += clamp(- sdf / blur, 0.0, 1.0);
     }
