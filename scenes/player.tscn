@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=3 uid="uid://bod7r823y2ysu"]
+[gd_scene load_steps=58 format=3 uid="uid://bod7r823y2ysu"]
 
 [ext_resource type="Script" uid="uid://bh4ppn2ksqwp8" path="res://scripts/player.gd" id="1_dqkch"]
 [ext_resource type="Texture2D" uid="uid://cd8i5r6blewy3" path="res://assets/person/getting_up/Person_Getting_Up1.png" id="2_4r5pv"]
@@ -49,6 +49,9 @@
 [ext_resource type="Texture2D" uid="uid://det17047cntm7" path="res://assets/forms/bike/Bike.png" id="31_6c3st"]
 [ext_resource type="Texture2D" uid="uid://b630vx02qf6dq" path="res://assets/forms/bike/Bike2.png" id="32_1da1t"]
 [ext_resource type="Texture2D" uid="uid://bhvt3grg6saa6" path="res://assets/forms/propeller-hat.png" id="46_p21yu"]
+[ext_resource type="Texture2D" uid="uid://c1in55dwnmy2l" path="res://assets/forms/sheep/sheep_1.png" id="47_lxlsd"]
+[ext_resource type="Texture2D" uid="uid://bcx1sgsyoivnj" path="res://assets/forms/sheep/sheep_2.png" id="48_ha2mi"]
+[ext_resource type="Texture2D" uid="uid://wqr7ckfkgx8m" path="res://assets/forms/sheep/sheep_3.png" id="49_apa73"]
 [ext_resource type="Texture2D" uid="uid://b8l2ih43jrv3n" path="res://assets/forms/undergarments.png" id="50_irpag"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_smehm"]
@@ -305,6 +308,20 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("47_lxlsd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("48_ha2mi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("49_apa73")
+}],
+"loop": true,
+"name": &"sheep",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": ExtResource("2_qlg0r")
 }],
 "loop": true,
@@ -336,6 +353,21 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="Animation" id="Animation_fulsm"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("forms:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
 [sub_resource type="Animation" id="Animation_qfm1y"]
 resource_name = "hop"
 length = 0.5
@@ -353,21 +385,6 @@ tracks/0/keys = {
 "values": [Vector2(0, 0), Vector2(0, -40), Vector2(0, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_fulsm"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("forms:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 0)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_4r5pv"]
 _data = {
 &"RESET": SubResource("Animation_fulsm"),
@@ -379,7 +396,7 @@ script = ExtResource("1_dqkch")
 
 [node name="forms" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_smehm")
-animation = &"bowling"
+animation = &"sheep"
 
 [node name="hop_animator" type="AnimationPlayer" parent="."]
 libraries = {
