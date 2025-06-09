@@ -1,0 +1,39 @@
+[gd_scene load_steps=5 format=3 uid="uid://bn3tg2qi7ifep"]
+
+[ext_resource type="Shader" uid="uid://tj43wxvr837l" path="res://shaders/movingpurplestripes.gdshader" id="1_veheb"]
+[ext_resource type="Shader" uid="uid://b6t8pog534fnq" path="res://shaders/whirl.gdshader" id="2_b1ytl"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_a5jh6"]
+shader = ExtResource("1_veheb")
+shader_parameter/rotation = 3.0
+shader_parameter/color_gap = Vector4(0.25, 0, 0, 0)
+shader_parameter/color_stripe = Vector4(1, 0, 1, 0.2)
+shader_parameter/divisions = 16.0
+shader_parameter/stripe_bias = 1.5
+shader_parameter/speed = 0.05
+shader_parameter/angle = 0.3
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6b6dj"]
+shader = ExtResource("2_b1ytl")
+shader_parameter/rotation = 3.0
+shader_parameter/color_gap = Vector4(0.25, 0, 0, 0)
+shader_parameter/color_stripe = Vector4(1, 0, 1, 0.2)
+shader_parameter/divisions = 16.0
+shader_parameter/stripe_bias = 1.5
+shader_parameter/speed = 0.05
+shader_parameter/angle = 0.3
+
+[node name="purple_swirl_shader" type="Node2D"]
+z_index = 5
+
+[node name="screenshader" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_a5jh6")
+offset_right = 1920.0
+offset_bottom = 1080.0
+mouse_filter = 2
+
+[node name="screenshader2" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_6b6dj")
+offset_right = 1920.0
+offset_bottom = 1080.0
+mouse_filter = 2
