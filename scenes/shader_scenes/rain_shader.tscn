@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://cvqoxda8eygb"]
+
+[ext_resource type="Shader" uid="uid://cqagjepa5marq" path="res://shaders/rain.gdshader" id="1_xexn0"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qesml"]
+shader = ExtResource("1_xexn0")
+shader_parameter/count = 150
+shader_parameter/speed = 25.0
+shader_parameter/blur = 0.002
+shader_parameter/colour = Color(1, 1, 1, 1)
+shader_parameter/size = Vector2(0.007, 0.2)
+
+[node name="rain_shader" type="Node2D"]
+z_index = 5
+
+[node name="rain_shader_rect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_qesml")
+offset_right = 1920.0
+offset_bottom = 1080.0
+mouse_filter = 2

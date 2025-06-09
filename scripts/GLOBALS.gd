@@ -41,7 +41,13 @@ var objects = [
 
 var feelings = [
 	# [ string FeelingName, string pathToShader, float amountToApply ]
-	["Sad", "sampleshaderpath", 0.3]
+	["Soggy", "res://scenes/shader_scenes/rain_shader.tscn", 1.0],
+	["Spooky", "res://scenes/shader_scenes/fog_shader.tscn", 1.0],
+	["Crunchy", "res://scenes/shader_scenes/crunchy_shader.tscn", 1.0],
+	["Trapped", "res://scenes/shader_scenes/trapped_shader.tscn", 1.0],
+	["Woozy", "res://scenes/shader_scenes/woozy_shader.tscn", 1.0],
+	["Purpley swirly", "res://scenes/shader_scenes/purple_swirl_shader.tscn", 1.0],
+	["Reeling", "res://scenes/shader_scenes/chromatic_aberration_shader.tscn", 1.0]
 ]
 
 var move_words = [

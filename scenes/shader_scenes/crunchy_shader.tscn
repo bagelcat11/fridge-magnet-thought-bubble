@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://comohxuq68qv2"]
+
+[ext_resource type="Shader" uid="uid://cr5tqjnb8ssl3" path="res://shaders/crunchy.gdshader" id="1_ew5e0"]
+[ext_resource type="Shader" uid="uid://7i7hkrs2wla2" path="res://shaders/crunchy2.gdshader" id="2_hua8b"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_em4pf"]
+shader = ExtResource("1_ew5e0")
+shader_parameter/size = 25.0
+shader_parameter/color1 = Color(1, 0.1, 1, 1)
+shader_parameter/color2 = Color(0.1, 0.7, 0.1, 1)
+shader_parameter/speed = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ab3fn"]
+shader = ExtResource("2_hua8b")
+shader_parameter/max_dots = 800
+shader_parameter/dot_size = 0.7
+shader_parameter/brightness_mult = 1.0
+shader_parameter/invert = false
+shader_parameter/primary_color = Color(0.1, 0.1, 0.2, 1)
+shader_parameter/secondary_color = Color(0.9, 0.9, 0.8, 1)
+
+[node name="crunchy_shader" type="Node2D"]
+z_index = 5
+
+[node name="crunchyrect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_em4pf")
+offset_right = 1932.0
+offset_bottom = 1098.0
+
+[node name="crunchyrect2" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_ab3fn")
+offset_right = 1946.0
+offset_bottom = 1107.0

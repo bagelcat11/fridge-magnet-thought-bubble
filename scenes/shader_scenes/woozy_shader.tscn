@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://chxis2cxkf7qm"]
+
+[ext_resource type="Shader" uid="uid://dhaq3wb7hnr2l" path="res://shaders/woozy1.gdshader" id="1_ploxm"]
+[ext_resource type="Shader" uid="uid://cmqho0rmc6s3x" path="res://shaders/woozy2.gdshader" id="2_sd62p"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xrc2d"]
+shader = ExtResource("1_ploxm")
+shader_parameter/stretch = 0.8
+shader_parameter/thing1 = 0.6
+shader_parameter/thing2 = 0.6
+shader_parameter/thing3 = 0.8
+shader_parameter/scale = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7k2rj"]
+shader = ExtResource("2_sd62p")
+shader_parameter/stretch = 0.8
+shader_parameter/thing1 = 0.6
+shader_parameter/thing2 = 0.6
+shader_parameter/thing3 = 0.8
+shader_parameter/scale = 1.0
+
+[node name="woozy_shader" type="Node2D"]
+z_index = 5
+
+[node name="woozyrect" type="ColorRect" parent="."]
+z_index = 9
+material = SubResource("ShaderMaterial_xrc2d")
+offset_right = 1918.0
+offset_bottom = 1076.0
+
+[node name="woozyrect2" type="ColorRect" parent="."]
+z_index = 9
+material = SubResource("ShaderMaterial_7k2rj")
+offset_right = 1918.0
+offset_bottom = 1076.0

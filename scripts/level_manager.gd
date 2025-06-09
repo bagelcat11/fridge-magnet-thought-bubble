@@ -5,6 +5,7 @@ extends Node2D
 @onready var wordScene = load("res://scenes/word.tscn")
 @onready var outsideBackground = $background/outside_parallax2d
 @onready var insideBackground = $background/inside_parallax2d
+var currentShaders = {}
 signal _send_player_home()
 
 func _ready() -> void:
@@ -74,3 +75,15 @@ func _go_home() -> void:
 	#print("sending player home")
 	outsideBackground.autoscroll.x = -Globals.defaultScrollSpeed
 	$end_timer.start(Globals.endDelayTime)
+
+
+func _instantiate_shader(name: String, path: String) -> void:
+	var shaderScene = load(path)
+	var newShader = shaderScene.instantiate()
+	currentShaders[name] = newShader
+	add_child(newShader)
+
+
+func _free_shader(name: String) -> void:
+	if currentShaders.has(name):
+		currentShaders[name].queue_free()

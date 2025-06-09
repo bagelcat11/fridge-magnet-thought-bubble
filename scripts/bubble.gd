@@ -9,6 +9,8 @@ var default_form = Globals.default_obj
 signal _get_up()
 signal _scroll_background(speed: float)
 signal _go_home()
+signal _instantiate_shader(name: String, path: String)
+signal _free_shader(name: String)
 
 #var currentHeldMagnet = null
 
@@ -59,6 +61,8 @@ func _on_word_area_area_entered(area: Area2D) -> void:
 					Globals.change_form.emit(default_form)
 					_scroll_background.emit(default_form[1]) #change bc scroll speed
 					#print("changing form to ", default_form)
+			else:
+				_instantiate_shader.emit(mag.myAttributes[0], mag.myAttributes[1])
 
 func _on_word_area_area_exited(area: Area2D) -> void:
 	if area.collision_layer == 2:
@@ -78,3 +82,6 @@ func _on_word_area_area_exited(area: Area2D) -> void:
 					Globals.change_form.emit(default_form)
 					_scroll_background.emit(default_form[1]) #change bc scroll speed
 					print("changing form to ", default_form)
+			else:
+				_free_shader.emit(mag.myAttributes[0])
+				
