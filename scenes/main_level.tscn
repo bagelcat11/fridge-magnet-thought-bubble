@@ -1,16 +1,21 @@
-[gd_scene load_steps=19 format=3 uid="uid://dcpjx25fo6rxo"]
+[gd_scene load_steps=23 format=3 uid="uid://dcpjx25fo6rxo"]
 
 [ext_resource type="Script" uid="uid://bdla10o6f8jed" path="res://scripts/level_manager.gd" id="1_6we3w"]
 [ext_resource type="PackedScene" uid="uid://bm3kj1wr3vtt7" path="res://scenes/bubble.tscn" id="1_ufxs0"]
 [ext_resource type="PackedScene" uid="uid://bod7r823y2ysu" path="res://scenes/player.tscn" id="2_6we3w"]
 [ext_resource type="PackedScene" uid="uid://dwoodyqrbkxhj" path="res://scenes/end.tscn" id="2_k5pu3"]
-[ext_resource type="Shader" uid="uid://tj43wxvr837l" path="res://shaders/test.gdshader" id="4_8ra5a"]
-[ext_resource type="Shader" uid="uid://b6t8pog534fnq" path="res://shaders/test2.gdshader" id="5_8ra5a"]
 [ext_resource type="Shader" uid="uid://bap8ab725qnga" path="res://shaders/fog.gdshader" id="5_iqu8w"]
 [ext_resource type="Shader" uid="uid://cqagjepa5marq" path="res://shaders/rain.gdshader" id="6_5fr2l"]
+[ext_resource type="Shader" uid="uid://tj43wxvr837l" path="res://shaders/movingpurplestripes.gdshader" id="4_8ra5a"]
+[ext_resource type="Shader" uid="uid://b6t8pog534fnq" path="res://shaders/whirl.gdshader" id="5_8ra5a"]
 [ext_resource type="Texture2D" uid="uid://dlj3otsvjpi1n" path="res://assets/outside_background.png" id="6_bq26l"]
 [ext_resource type="Shader" uid="uid://wo5wo0r0xf37" path="res://shaders/chromatic_aberration.gdshader" id="7_2sb77"]
 [ext_resource type="Texture2D" uid="uid://dbof1uhyni8mm" path="res://assets/temp_room_asset.jpg" id="7_u2c82"]
+[ext_resource type="Shader" uid="uid://ca1dk28embeq2" path="res://shaders/trapped.gdshader" id="8_k5pu3"]
+[ext_resource type="Shader" uid="uid://cr5tqjnb8ssl3" path="res://shaders/crunchy.gdshader" id="9_iqu8w"]
+[ext_resource type="Shader" uid="uid://7i7hkrs2wla2" path="res://shaders/crunchy2.gdshader" id="10_5fr2l"]
+[ext_resource type="Shader" uid="uid://x2itvbge8psn" path="res://shaders/mystery.gdshader" id="11_2sb77"]
+[ext_resource type="Shader" uid="uid://rgur1qn8jee2" path="res://shaders/mystery2.gdshader" id="12_fkrx8"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5fr2l"]
 shader = ExtResource("5_iqu8w")
@@ -57,6 +62,46 @@ shader_parameter/divisions = 16.0
 shader_parameter/stripe_bias = 1.5
 shader_parameter/speed = 0.05
 shader_parameter/angle = 0.3
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_u2c82"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_iqu8w"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5fr2l"]
+shader = ExtResource("8_k5pu3")
+shader_parameter/radius = 1.0
+shader_parameter/speed = 1.0
+shader_parameter/effect_color = Color(0.251, 0, 0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2sb77"]
+shader = ExtResource("9_iqu8w")
+shader_parameter/size = 25.0
+shader_parameter/color1 = Color(1, 0.1, 1, 1)
+shader_parameter/color2 = Color(0.1, 0.7, 0.1, 1)
+shader_parameter/speed = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fkrx8"]
+shader = ExtResource("10_5fr2l")
+shader_parameter/max_dots = 800
+shader_parameter/dot_size = 0.7
+shader_parameter/brightness_mult = 1.0
+shader_parameter/invert = false
+shader_parameter/primary_color = Color(0.1, 0.1, 0.2, 1)
+shader_parameter/secondary_color = Color(0.9, 0.9, 0.8, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mwgft"]
+shader = ExtResource("11_2sb77")
+shader_parameter/influence = 0.2
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_adxub"]
+shader = ExtResource("12_fkrx8")
+shader_parameter/spread = 0.5
+shader_parameter/size = 0.5
+shader_parameter/snow_color = Color(1, 1, 1, 1)
+shader_parameter/snow_transparency = 0.2
+shader_parameter/speed = 0.5
+shader_parameter/wind = 0.0
+shader_parameter/num_of_layers = 40
 
 [node name="main_level" type="Node2D"]
 script = ExtResource("1_6we3w")
@@ -109,6 +154,50 @@ material = SubResource("ShaderMaterial_bq26l")
 offset_right = 1920.0
 offset_bottom = 1080.0
 mouse_filter = 2
+
+[node name="woozyrect" type="ColorRect" parent="."]
+visible = false
+z_index = 9
+material = SubResource("ShaderMaterial_u2c82")
+offset_right = 1918.0
+offset_bottom = 1076.0
+
+[node name="woozyrect2" type="ColorRect" parent="."]
+visible = false
+z_index = 9
+material = SubResource("ShaderMaterial_iqu8w")
+offset_right = 1918.0
+offset_bottom = 1076.0
+
+[node name="trappedrect" type="ColorRect" parent="."]
+visible = false
+material = SubResource("ShaderMaterial_5fr2l")
+offset_right = 1928.0
+offset_bottom = 1089.0
+
+[node name="crunchyrect" type="ColorRect" parent="."]
+visible = false
+material = SubResource("ShaderMaterial_2sb77")
+offset_right = 1932.0
+offset_bottom = 1098.0
+
+[node name="crunchyrect2" type="ColorRect" parent="."]
+visible = false
+material = SubResource("ShaderMaterial_fkrx8")
+offset_right = 1946.0
+offset_bottom = 1107.0
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+material = SubResource("ShaderMaterial_mwgft")
+offset_right = 1925.0
+offset_bottom = 1096.0
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+visible = false
+material = SubResource("ShaderMaterial_adxub")
+offset_right = 1934.0
+offset_bottom = 1105.0
 
 [node name="background" type="ParallaxBackground" parent="."]
 scroll_offset = Vector2(1, 0)

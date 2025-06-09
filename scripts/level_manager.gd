@@ -12,6 +12,7 @@ func _ready() -> void:
 	outsideBackground.visible = false
 	insideBackground.visible = true
 	outsideBackground.autoscroll.x = Globals.defaultScrollSpeed
+	$player.global_position = Vector2(1001, 722)
 	
 func _physics_process(delta: float) -> void:
 	pass
