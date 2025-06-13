@@ -5,6 +5,24 @@ extends Node2D
 @onready var wordScene = load("res://scenes/word.tscn")
 @onready var outsideBackground = $background/outside_parallax2d
 @onready var insideBackground = $background/inside_parallax2d
+@onready var bubbleRect = $bubble/word_area/CollisionShape2D.shape.get_rect()
+@onready var screenPadding = 50
+@onready var bubblePadding = 10
+#so sorry for all these variables
+@onready var viewport_x = get_viewport().get_visible_rect().size.x
+@onready var viewport_y = get_viewport().get_visible_rect().size.y
+	
+@onready var screen_low_x = screenPadding
+@onready var screen_high_x = viewport_x - screenPadding - Globals.word_w
+@onready var screen_low_y = screenPadding
+@onready var screen_high_y = viewport_y - screenPadding - Globals.word_h
+	
+@onready var bubblePosition = Vector2($bubble/word_area/CollisionShape2D.global_position.x - (bubbleRect.size.x / 2), $bubble/word_area/CollisionShape2D.global_position.y - (bubbleRect.size.y / 2))
+@onready var bubble_low_x = bubblePosition.x - Globals.word_w - bubblePadding
+@onready var bubble_high_x = bubblePosition.x + bubbleRect.size.x
+@onready var bubble_low_y = bubblePosition.y - Globals.word_h - bubblePadding
+@onready var bubble_high_y = bubblePosition.y + bubbleRect.size.y
+
 var currentShaders = {}
 signal _send_player_home()
 
@@ -18,17 +36,42 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	pass
 
-func _on_word_timer_timeout() -> void:
-	#if (Globals.stage == 0):
-		#pass #spawn the 'get up' words
-	#elif (Globals.stage == 1 || Globals.stage == 2):
-		#spawn the normal words (until we run out? or do we cycle?)
-	#TODO: need to make sure words don't spawn in the bubble
+func _on_word_timer_timeout() -> void:	
+	#var bubbleColorRect = ColorRect.new()
+	#bubbleColorRect.size = Vector2(bubbleRect.size.x, bubbleRect.size.y)
+	#bubbleColorRect.position = Vector2(bubblePosition.x, bubblePosition.y)
+	#add_child(bubbleColorRect)
+	
+	#var leftSlice = ColorRect.new()
+	#leftSlice.size = Vector2(bubble_low_x - screen_low_x, screen_high_y - screen_low_y)
+	#leftSlice.position = Vector2(screen_low_x, screen_low_y)
+	#add_child(leftSlice)
+	
+	#pick screen segment
+	var segment = randi() % 4
+	
+	var rand_x = 0
+	var rand_y = 0
+	
+	#pick random x and y within segment
+	if (segment == 0):
+		#left vertical slice
+		rand_x = randi() % int(bubble_low_x - screen_low_x) + screen_low_x
+		rand_y = randi() % int(screen_high_y - screen_low_y) + screen_low_y
+	elif (segment == 1):
+		#right vertical slice
+		rand_x = randi() % int(screen_high_x - bubble_high_x) + bubble_high_x
+		rand_y = randi() % int(screen_high_y - screen_low_y) + screen_low_y
+	elif (segment == 2):
+		#top middle section
+		rand_x = randi() % int(bubble_high_x - bubble_low_x) + bubble_low_x
+		rand_y = randi() % int(bubble_low_y - screen_low_y) + screen_low_y
+	elif (segment == 3):
+		#bottom middle section
+		rand_x = randi() % int(bubble_high_x - bubble_low_x) + bubble_low_x
+		rand_y = randi() % int(screen_high_y - bubble_high_y) + bubble_high_y
+
 	var newWord = wordScene.instantiate()
-	var rand_x = randi() % int(get_viewport().get_visible_rect().size.x)
-	var rand_y = randi() % int(get_viewport().get_visible_rect().size.y)
-	#print("rand_x: ", rand_x)
-	#print("rand_y: ", rand_y)
 	newWord.set_position(Vector2(rand_x, rand_y))
 	add_child(newWord)
 	newWord.add_to_group("words")
@@ -87,3 +130,4 @@ func _instantiate_shader(name: String, path: String) -> void:
 func _free_shader(name: String) -> void:
 	if currentShaders.has(name):
 		currentShaders[name].queue_free()
+		currentShaders.erase(name)

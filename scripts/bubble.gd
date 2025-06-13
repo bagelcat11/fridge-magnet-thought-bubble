@@ -28,12 +28,14 @@ func _on_word_area_area_entered(area: Area2D) -> void:
 		var mag = area.get_parent()
 		whoIsInBubble.append(mag)
 		mag.isInBubble = true
+		#print(mag.myAttributes)
 		#mag.get_node("Timer").stop()
 		#print("currently have: " + str(whoIsInBubble))
 		if (Globals.stage == 0):
 			#do funny move word things in here:
 			#TODO: play animation when word is put in bubble (shake anim or smth)
 			#if all move words are in bubble (TODO: make words not spawn multiple times)
+			#print(whoIsInBubble)
 			if (whoIsInBubble.size() == Globals.move_words.size()):
 				#get up
 				_get_up.emit()
@@ -77,11 +79,11 @@ func _on_word_area_area_exited(area: Area2D) -> void:
 				if formStack.size() > 0:
 					Globals.change_form.emit(formStack[-1])
 					_scroll_background.emit(formStack[-1][1]) #change bc scroll speed
-					print("changing form to ", formStack[-1])
+					#print("changing form to ", formStack[-1])
 				else:
 					Globals.change_form.emit(default_form)
 					_scroll_background.emit(default_form[1]) #change bc scroll speed
-					print("changing form to ", default_form)
+					#print("changing form to ", default_form)
 			else:
 				_free_shader.emit(mag.myAttributes[0])
 				

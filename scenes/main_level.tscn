@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://bm3kj1wr3vtt7" path="res://scenes/bubble.tscn" id="1_ufxs0"]
 [ext_resource type="PackedScene" uid="uid://bod7r823y2ysu" path="res://scenes/player.tscn" id="2_6we3w"]
 [ext_resource type="PackedScene" uid="uid://dwoodyqrbkxhj" path="res://scenes/end.tscn" id="2_k5pu3"]
-[ext_resource type="Texture2D" uid="uid://dlj3otsvjpi1n" path="res://assets/outside_background.png" id="6_bq26l"]
+[ext_resource type="Texture2D" uid="uid://mcuggcbec2yc" path="res://assets/mirrored_outside_background.png" id="7_k5pu3"]
 [ext_resource type="Texture2D" uid="uid://dbof1uhyni8mm" path="res://assets/temp_room_asset.jpg" id="7_u2c82"]
 [ext_resource type="Shader" uid="uid://x2itvbge8psn" path="res://shaders/mystery.gdshader" id="11_2sb77"]
 [ext_resource type="Shader" uid="uid://rgur1qn8jee2" path="res://shaders/mystery2.gdshader" id="12_fkrx8"]
@@ -30,6 +30,7 @@ script = ExtResource("1_6we3w")
 visible = false
 
 [node name="bubble" parent="." instance=ExtResource("1_ufxs0")]
+modulate = Color(1, 1, 1, 1)
 z_index = 10
 
 [node name="player" parent="." instance=ExtResource("2_6we3w")]
@@ -55,14 +56,14 @@ scroll_base_offset = Vector2(1, 0)
 scroll_ignore_camera_zoom = true
 
 [node name="outside_parallax2d" type="Parallax2D" parent="background"]
-repeat_size = Vector2(2170.44, 0)
+repeat_size = Vector2(4341.76, 0)
 autoscroll = Vector2(100, 0)
 ignore_camera_scroll = true
 
 [node name="sprite" type="Sprite2D" parent="background/outside_parallax2d"]
 scale = Vector2(1.06, 1.06)
-texture = ExtResource("6_bq26l")
-offset = Vector2(1024, 512)
+texture = ExtResource("7_k5pu3")
+offset = Vector2(2048, 512)
 
 [node name="inside_parallax2d" type="Parallax2D" parent="background"]
 visible = false
