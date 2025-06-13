@@ -16,6 +16,8 @@ var sizeScaleWhenPickedUp = 1.2
 var isGoHomeWord = false
 #var mouseIsOnScreen = true
 
+@onready var viewportSize = get_viewport().get_visible_rect().size
+
 func _ready() -> void:
 	var c = rng.randf()
 	if (Globals.stage == 0):
@@ -66,7 +68,12 @@ func _input(event: InputEvent) -> void:
 
 func _physics_process(delta: float) -> void:
 	if isPickedUp:
-		global_position = get_global_mouse_position() + pickupOffset
+		var mousePosition = get_global_mouse_position()
+		if (mousePosition.x > viewportSize.x || mousePosition.y > viewportSize.y || mousePosition.x < 0 || mousePosition.y < 0):
+			#if mouse outside of viewport
+			isPickedUp = false
+		else:
+			global_position = mousePosition + pickupOffset
 
 
 func spawn_in_anim():

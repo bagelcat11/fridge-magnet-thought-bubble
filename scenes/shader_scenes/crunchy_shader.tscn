@@ -26,8 +26,10 @@ z_index = 5
 material = SubResource("ShaderMaterial_em4pf")
 offset_right = 1932.0
 offset_bottom = 1098.0
+mouse_filter = 2
 
 [node name="crunchyrect2" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_ab3fn")
 offset_right = 1946.0
 offset_bottom = 1107.0
+mouse_filter = 2
