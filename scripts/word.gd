@@ -14,6 +14,7 @@ var isInBubble = false
 var pickupOffset = Vector2.ZERO
 var sizeScaleWhenPickedUp = 1.2
 var isGoHomeWord = false
+#var mouseIsOnScreen = true
 
 func _ready() -> void:
 	var c = rng.randf()
@@ -50,7 +51,7 @@ func _ready() -> void:
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and hasMouse:
 		isPickedUp = !isPickedUp
-		#print("picked up")
+		#print("picked up: ", isPickedUp)
 		
 		if isPickedUp:
 			# drop shadow also??
@@ -82,10 +83,19 @@ func _on_fridge_magnet_mouse_entered() -> void:
 	#print("hasMouse :3")
 
 func _on_fridge_magnet_mouse_exited() -> void:
+	#if (mouseIsOnScreen):
 	hasMouse = false
-	#print("no more mouse :/")
+	#print("no more has mouse :/")
 
 
 func _on_timer_timeout() -> void:
 	#delete word
 	self.queue_free()
+
+#func _notification(notif):
+	#if notif == NOTIFICATION_WM_MOUSE_ENTER:
+		#mouseIsOnScreen = true
+		#print("enter")
+	#elif notif == NOTIFICATION_WM_MOUSE_EXIT:
+		#mouseIsOnScreen = false
+		#print("exit")
