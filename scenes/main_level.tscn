@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dcpjx25fo6rxo"]
+[gd_scene load_steps=13 format=3 uid="uid://dcpjx25fo6rxo"]
 
 [ext_resource type="Script" uid="uid://bdla10o6f8jed" path="res://scripts/level_manager.gd" id="1_6we3w"]
 [ext_resource type="PackedScene" uid="uid://bm3kj1wr3vtt7" path="res://scenes/bubble.tscn" id="1_ufxs0"]
@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://dwoodyqrbkxhj" path="res://scenes/end.tscn" id="2_k5pu3"]
 [ext_resource type="Texture2D" uid="uid://mcuggcbec2yc" path="res://assets/mirrored_outside_background.png" id="7_k5pu3"]
 [ext_resource type="Texture2D" uid="uid://dbof1uhyni8mm" path="res://assets/temp_room_asset.jpg" id="7_u2c82"]
+[ext_resource type="Texture2D" uid="uid://c1ns35kal7j0p" path="res://assets/mirrored_outside_house_background.png" id="8_5fr2l"]
+[ext_resource type="Texture2D" uid="uid://pxi07ifxr1vq" path="res://assets/house_background.png" id="8_iqu8w"]
 [ext_resource type="Shader" uid="uid://x2itvbge8psn" path="res://shaders/mystery.gdshader" id="11_2sb77"]
 [ext_resource type="Shader" uid="uid://rgur1qn8jee2" path="res://shaders/mystery2.gdshader" id="12_fkrx8"]
 
@@ -64,6 +66,17 @@ ignore_camera_scroll = true
 scale = Vector2(1.06, 1.06)
 texture = ExtResource("7_k5pu3")
 offset = Vector2(2048, 512)
+
+[node name="home2" type="Sprite2D" parent="background/outside_parallax2d"]
+scale = Vector2(1.06, 1.06)
+texture = ExtResource("8_5fr2l")
+offset = Vector2(2048, 512)
+
+[node name="home" type="Sprite2D" parent="background/outside_parallax2d"]
+visible = false
+scale = Vector2(0.53, 0.53)
+texture = ExtResource("8_iqu8w")
+offset = Vector2(2048, 959.65)
 
 [node name="inside_parallax2d" type="Parallax2D" parent="background"]
 visible = false
