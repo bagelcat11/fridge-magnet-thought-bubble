@@ -17,7 +17,7 @@ signal _stop_word_spawning()
 #var currentHeldMagnet = null
 
 func _ready() -> void:
-	pass
+	$animator.play("bubble_float")
 
 func _physics_process(delta: float) -> void:
 	#if currentHeldMagnet != null :# and mouse is released:

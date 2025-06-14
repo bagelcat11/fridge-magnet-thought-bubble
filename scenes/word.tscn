@@ -1,13 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://bpn5dtoyqv8uv"]
+[gd_scene load_steps=4 format=3 uid="uid://bpn5dtoyqv8uv"]
 
-[ext_resource type="Texture2D" uid="uid://bjd81ne80g4u" path="res://icon.svg" id="1_ar2rp"]
 [ext_resource type="Script" uid="uid://b584mbyu77rgx" path="res://scripts/word.gd" id="1_ve73v"]
+[ext_resource type="Texture2D" uid="uid://bm8shunrr0mo3" path="res://assets/magnet.png" id="2_ve73v"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sdpmc"]
 size = Vector2(124, 36)
-
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ve73v"]
-blend_mode = 2
 
 [node name="word" type="Node2D"]
 z_index = 10
@@ -35,6 +32,7 @@ offset_bottom = 36.5
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/normal_font_size = 18
 text = "couch"
 fit_content = true
@@ -44,10 +42,9 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="sprite" type="Sprite2D" parent="."]
-material = SubResource("CanvasItemMaterial_ve73v")
-position = Vector2(64, 20.5)
-scale = Vector2(1, 0.320313)
-texture = ExtResource("1_ar2rp")
+position = Vector2(64, 20)
+scale = Vector2(0.205761, 0.205761)
+texture = ExtResource("2_ve73v")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 5.0
