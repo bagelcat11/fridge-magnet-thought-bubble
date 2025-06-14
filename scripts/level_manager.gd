@@ -40,6 +40,7 @@ var currentShaders = {}
 signal _send_player_home()
 
 func _ready() -> void:
+	$black_screen.visible = false
 	$word_timer.start(1.0) #delay from opening to first word spawning
 	outsideBackground.visible = false
 	homeBackground.visible = false
@@ -116,15 +117,16 @@ func _on_word_timer_timeout() -> void:
 
 
 func _start_stage_1() -> void:
-	Globals.stage = 1
-	#TODO: play animation to fade to black->fade to outside
-	outsideBackground.visible = true
-	insideBackground.visible = false
-	homeBackground.visible = true
-	homeBackground.autoscroll.x = Globals.defaultScrollSpeed #TODO: make home bg update speed if necessary when obj change..?
-	outsideBackground.autoscroll.x = Globals.defaultScrollSpeed
-	$player.global_position = Globals.playerDefaultPos
-	$end_timer.start(Globals.walkTime)
+	Globals.stage = 0.5 #transition stage
+	$black_screen.visible = true
+	$black_screen/black_screen_animator.play("fade_in")
+	#outsideBackground.visible = true
+	#insideBackground.visible = false
+	#homeBackground.visible = true
+	#homeBackground.autoscroll.x = Globals.defaultScrollSpeed #TODO: make home bg update speed if necessary when obj change..?
+	#outsideBackground.autoscroll.x = Globals.defaultScrollSpeed
+	#$player.global_position = Globals.playerDefaultPos
+	#$end_timer.start(Globals.walkTime)
 
 
 func _scroll_background(speed: float) -> void:
@@ -212,3 +214,18 @@ func _on_door_area_entered(area: Area2D) -> void:
 
 func _shake_animation() -> void:
 	shakeStrength = defaultShakeStrength
+
+
+func _on_black_screen_animator_animation_finished(anim_name: StringName) -> void:
+	if (anim_name == "fade_in"):
+		Globals.stage = 1
+		outsideBackground.visible = true
+		insideBackground.visible = false
+		homeBackground.visible = true
+		homeBackground.autoscroll.x = Globals.defaultScrollSpeed #TODO: make home bg update speed if necessary when obj change..?
+		outsideBackground.autoscroll.x = Globals.defaultScrollSpeed
+		$player.global_position = Globals.playerDefaultPos
+		$end_timer.start(Globals.walkTime)
+		$black_screen/black_screen_animator.play("fade_out")
+	elif (anim_name == "fade_out"):
+		$black_screen.visible = false
