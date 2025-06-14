@@ -162,6 +162,15 @@ func _go_home() -> void:
 	#stop words
 	$word_timer.stop()
 	#$end_timer.start(Globals.endDelayTime)
+	#free words
+	for word in get_tree().get_nodes_in_group("words"):
+		#currentShaders = {}
+		print(word)
+		if (!word.isObject):
+			if currentShaders.has(word.myAttributes[0]):
+				currentShaders[word.myAttributes[0]].queue_free()
+				currentShaders.erase(word.myAttributes[0])
+		word.queue_free()
 
 
 func _instantiate_shader(name: String, path: String) -> void:
@@ -229,3 +238,8 @@ func _on_black_screen_animator_animation_finished(anim_name: StringName) -> void
 		$black_screen/black_screen_animator.play("fade_out")
 	elif (anim_name == "fade_out"):
 		$black_screen.visible = false
+		$word_timer.start(Globals.wordSpawnTime)
+
+
+func _on_bubble__stop_word_spawning() -> void:
+	$word_timer.stop()

@@ -252,6 +252,7 @@ libraries = {
 [connection signal="_instantiate_shader" from="bubble" to="." method="_instantiate_shader"]
 [connection signal="_scroll_background" from="bubble" to="." method="_scroll_background"]
 [connection signal="_shake_animation" from="bubble" to="." method="_shake_animation"]
+[connection signal="_stop_word_spawning" from="bubble" to="." method="_on_bubble__stop_word_spawning"]
 [connection signal="_start_stage_1" from="player" to="." method="_start_stage_1"]
 [connection signal="timeout" from="word_timer" to="." method="_on_word_timer_timeout"]
 [connection signal="area_entered" from="background/outside_parallax2d/sprite/background_edge_marker" to="." method="_on_background_edge_marker_area_entered"]

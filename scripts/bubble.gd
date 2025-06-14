@@ -12,6 +12,7 @@ signal _go_home()
 signal _instantiate_shader(name: String, path: String)
 signal _free_shader(name: String)
 signal _shake_animation()
+signal _stop_word_spawning()
 
 #var currentHeldMagnet = null
 
@@ -40,6 +41,7 @@ func _on_word_area_area_entered(area: Area2D) -> void:
 			if (whoIsInBubble.size() == Globals.move_words.size()):
 				#get up
 				_get_up.emit()
+				_stop_word_spawning.emit()
 				#clear all words from bubble
 				whoIsInBubble = []
 				#clear all words from tree
