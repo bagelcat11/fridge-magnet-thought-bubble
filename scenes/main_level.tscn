@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dcpjx25fo6rxo"]
+[gd_scene load_steps=16 format=3 uid="uid://dcpjx25fo6rxo"]
 
 [ext_resource type="Script" uid="uid://bdla10o6f8jed" path="res://scripts/level_manager.gd" id="1_6we3w"]
 [ext_resource type="PackedScene" uid="uid://bm3kj1wr3vtt7" path="res://scenes/bubble.tscn" id="1_ufxs0"]
@@ -8,6 +8,15 @@
 [ext_resource type="Shader" uid="uid://pqntc5rigq5x" path="res://shaders/wired.gdshader" id="6_k5pu3"]
 [ext_resource type="Texture2D" uid="uid://mcuggcbec2yc" path="res://assets/mirrored_outside_background.png" id="7_k5pu3"]
 [ext_resource type="Texture2D" uid="uid://dbof1uhyni8mm" path="res://assets/temp_room_asset.jpg" id="7_u2c82"]
+
+[ext_resource type="Texture2D" uid="uid://c1ns35kal7j0p" path="res://assets/mirrored_outside_house_background.png" id="8_5fr2l"]
+[ext_resource type="Texture2D" uid="uid://pxi07ifxr1vq" path="res://assets/house_background.png" id="8_iqu8w"]
+[ext_resource type="Shader" uid="uid://x2itvbge8psn" path="res://shaders/mystery.gdshader" id="11_2sb77"]
+[ext_resource type="Shader" uid="uid://rgur1qn8jee2" path="res://shaders/mystery2.gdshader" id="12_fkrx8"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mwgft"]
+shader = ExtResource("11_2sb77")
+shader_parameter/influence = 0.2
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_adxub"]
 shader = ExtResource("5_k5pu3")
@@ -25,6 +34,15 @@ shader_parameter/bg_color = Color(0, 0, 0, 1)
 shader_parameter/fg_color = Color(1, 1, 1, 1)
 shader_parameter/invert = true
 shader_parameter/intensity = 1.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5fr2l"]
+size = Vector2(0.943396, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fkrx8"]
+size = Vector2(256, 321)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2sb77"]
+size = Vector2(17, 17)
 
 [node name="main_level" type="Node2D"]
 script = ExtResource("1_6we3w")
@@ -67,6 +85,45 @@ scale = Vector2(1.06, 1.06)
 texture = ExtResource("7_k5pu3")
 offset = Vector2(2048, 512)
 
+[node name="background_edge_marker" type="Area2D" parent="background/outside_parallax2d/sprite"]
+
+[node name="background_edge_marker_collision_shape" type="CollisionShape2D" parent="background/outside_parallax2d/sprite/background_edge_marker"]
+position = Vector2(0.471698, 0)
+shape = SubResource("RectangleShape2D_5fr2l")
+
+[node name="ColorRect" type="ColorRect" parent="background/outside_parallax2d/sprite/background_edge_marker"]
+offset_right = 1.0
+offset_bottom = 10.0
+
+[node name="home2" type="Sprite2D" parent="background/outside_parallax2d"]
+visible = false
+scale = Vector2(1.06, 1.06)
+texture = ExtResource("8_5fr2l")
+offset = Vector2(2048, 512)
+
+[node name="home" type="Sprite2D" parent="background/outside_parallax2d"]
+visible = false
+scale = Vector2(0.53, 0.53)
+texture = ExtResource("8_iqu8w")
+offset = Vector2(2048, 959.65)
+
+[node name="home_parallax2d" type="Parallax2D" parent="background"]
+z_index = 1
+repeat_size = Vector2(8683.52, 0)
+ignore_camera_scroll = true
+
+[node name="home2" type="Sprite2D" parent="background/home_parallax2d"]
+scale = Vector2(1.06, 1.06)
+texture = ExtResource("8_5fr2l")
+offset = Vector2(6144, 480.02)
+
+[node name="door_area" type="Area2D" parent="background/home_parallax2d/home2"]
+scale = Vector2(0.943396, 0.943396)
+
+[node name="door_collision_shape" type="CollisionShape2D" parent="background/home_parallax2d/home2/door_area"]
+position = Vector2(5930, 702.5)
+shape = SubResource("RectangleShape2D_fkrx8")
+
 [node name="inside_parallax2d" type="Parallax2D" parent="background"]
 visible = false
 ignore_camera_scroll = true
@@ -80,6 +137,12 @@ offset = Vector2(1024, 512)
 [node name="end_timer" type="Timer" parent="."]
 one_shot = true
 
+[node name="edge_marker" type="Area2D" parent="."]
+
+[node name="edge_marker_collison_shape" type="CollisionShape2D" parent="edge_marker"]
+position = Vector2(-8.5, 0.5)
+shape = SubResource("RectangleShape2D_2sb77")
+
 [connection signal="_send_player_home" from="." to="player" method="_on_main_level__send_player_home"]
 [connection signal="_free_shader" from="bubble" to="." method="_free_shader"]
 [connection signal="_get_up" from="bubble" to="player" method="_get_up"]
@@ -88,4 +151,6 @@ one_shot = true
 [connection signal="_scroll_background" from="bubble" to="." method="_scroll_background"]
 [connection signal="_start_stage_1" from="player" to="." method="_start_stage_1"]
 [connection signal="timeout" from="word_timer" to="." method="_on_word_timer_timeout"]
+[connection signal="area_entered" from="background/home_parallax2d/home2/door_area" to="." method="_on_door_area_entered"]
 [connection signal="timeout" from="end_timer" to="." method="_on_end_timer_timeout"]
+[connection signal="area_entered" from="edge_marker" to="." method="_on_edge_marker_area_entered"]

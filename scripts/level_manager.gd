@@ -5,6 +5,7 @@ extends Node2D
 @onready var wordScene = load("res://scenes/word.tscn")
 @onready var outsideBackground = $background/outside_parallax2d
 @onready var insideBackground = $background/inside_parallax2d
+@onready var homeBackground = $background/home_parallax2d
 @onready var bubbleRect = $bubble/word_area/CollisionShape2D.shape.get_rect()
 @onready var screenPadding = 50
 @onready var bubblePadding = 10
@@ -34,6 +35,7 @@ func _ready() -> void:
 	$player.global_position = Vector2(1001, 722)
 	
 func _physics_process(delta: float) -> void:
+	#print($background/outside_parallax2d/sprite/ColorRect/VisibleOnScreenNotifier2D.is_on_screen())
 	pass
 
 func _on_word_timer_timeout() -> void:	
@@ -94,15 +96,14 @@ func _scroll_background(speed: float) -> void:
 func _on_end_timer_timeout() -> void:
 	if (Globals.stage == 1):
 		Globals.stage = 2
-	elif (Globals.stage == 2):
-		#delete the words
-		for word in get_tree().get_nodes_in_group("words"):
-			word.queue_free()
-		#show end screen
-		$end.visible = true
-		#print("ee")
-		Globals.stage = 3
-		#this is so temporary..
+	#elif (Globals.stage == 2):
+		##delete the words
+		#for word in get_tree().get_nodes_in_group("words"):
+			#word.queue_free()
+		##show end screen
+		#$end.visible = true
+		##print("ee")
+		#Globals.stage = 4
 
 
 func _go_home() -> void:
@@ -117,7 +118,10 @@ func _go_home() -> void:
 	_send_player_home.emit()
 	#print("sending player home")
 	outsideBackground.autoscroll.x = -Globals.defaultScrollSpeed
-	$end_timer.start(Globals.endDelayTime)
+	Globals.stage = 3
+	#stop words
+	$word_timer.stop()
+	#$end_timer.start(Globals.endDelayTime)
 
 
 func _instantiate_shader(name: String, path: String) -> void:
@@ -131,3 +135,24 @@ func _free_shader(name: String) -> void:
 	if currentShaders.has(name):
 		currentShaders[name].queue_free()
 		currentShaders.erase(name)
+
+
+func _on_edge_marker_area_entered(area: Area2D) -> void:
+	print(area)
+	print(Globals.stage)
+	if (Globals.stage == 3):
+		print("home bg visible")
+		homeBackground.visible = true
+		homeBackground.autoscroll.x = -Globals.defaultScrollSpeed
+
+
+func _on_door_area_entered(area: Area2D) -> void:
+	#player has reached door of home
+	if (Globals.stage == 3 && area.name == "player_area"):
+		#delete the words
+		for word in get_tree().get_nodes_in_group("words"):
+			word.queue_free()
+		#show end screen
+		$end.visible = true
+		#print("ee")
+		Globals.stage = 4

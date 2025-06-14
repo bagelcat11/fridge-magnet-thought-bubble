@@ -1,12 +1,12 @@
 extends Node
 
 signal change_form(form: Array)
-var stage = 0 # 0=bedroom, 1=walking, 2=going home?
+var stage = 0 # 0=bedroom, 1=walking, 2=going home Appears, 3=walking home
 var wordTimerTime = 15.0
 var wordSpawnTime = 0.5
 var defaultScrollSpeed = 300.0
 var walkTime = 10.0 #in seconds (will be longer, short for testing)
-var endDelayTime = 3.0 #in seconds (delay after go home before game ends)
+var endDelayTime = 100.0 #in seconds (delay after go home before game ends)
 var goHomeWordSpawned = false
 var word_w = 124
 var word_h = 36 #im so sorry but word size is being a PAIN im just gonna put this here
