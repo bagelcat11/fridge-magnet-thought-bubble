@@ -14,7 +14,6 @@ var isInBubble = false
 var pickupOffset = Vector2.ZERO
 var sizeScaleWhenPickedUp = 1.2
 var isGoHomeWord = false
-#var mouseIsOnScreen = true
 
 @onready var viewportSize = get_viewport().get_visible_rect().size
 
@@ -98,11 +97,3 @@ func _on_fridge_magnet_mouse_exited() -> void:
 func _on_timer_timeout() -> void:
 	#delete word
 	self.queue_free()
-
-#func _notification(notif):
-	#if notif == NOTIFICATION_WM_MOUSE_ENTER:
-		#mouseIsOnScreen = true
-		#print("enter")
-	#elif notif == NOTIFICATION_WM_MOUSE_EXIT:
-		#mouseIsOnScreen = false
-		#print("exit")
