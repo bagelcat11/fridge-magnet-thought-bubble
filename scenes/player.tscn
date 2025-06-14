@@ -382,7 +382,7 @@ script = ExtResource("1_dqkch")
 
 [node name="forms" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_smehm")
-animation = &"bowling"
+animation = &"person_lying"
 
 [node name="hop_animator" type="AnimationPlayer" parent="."]
 libraries = {

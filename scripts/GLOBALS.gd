@@ -3,13 +3,15 @@ extends Node
 signal change_form(form: Array)
 var stage = 0 # 0=bedroom, 1=walking, 2=going home Appears, 3=walking home
 var wordTimerTime = 15.0
-var wordSpawnTime = 0.5
+var wordSpawnTime = 2.0
 var defaultScrollSpeed = 300.0
 var walkTime = 10.0 #in seconds (will be longer, short for testing)
 var endDelayTime = 100.0 #in seconds (delay after go home before game ends)
 var goHomeWordSpawned = false
 var word_w = 124
 var word_h = 36 #im so sorry but word size is being a PAIN im just gonna put this here
+var playerRoomPos = Vector2(953.0, 552.0)
+var playerDefaultPos = Vector2(1001.0, 722.0)
 
 var default_obj = ["person_walking", defaultScrollSpeed, "Person"]
 
