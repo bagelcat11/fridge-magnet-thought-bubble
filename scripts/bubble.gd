@@ -11,6 +11,8 @@ signal _scroll_background(speed: float)
 signal _go_home()
 signal _instantiate_shader(name: String, path: String)
 signal _free_shader(name: String)
+signal _shake_animation()
+signal _stop_word_spawning()
 
 #var currentHeldMagnet = null
 
@@ -34,11 +36,12 @@ func _on_word_area_area_entered(area: Area2D) -> void:
 		if (Globals.stage == 0):
 			#do funny move word things in here:
 			#TODO: play animation when word is put in bubble (shake anim or smth)
-			#if all move words are in bubble (TODO: make words not spawn multiple times)
+			_shake_animation.emit()
 			#print(whoIsInBubble)
 			if (whoIsInBubble.size() == Globals.move_words.size()):
 				#get up
 				_get_up.emit()
+				_stop_word_spawning.emit()
 				#clear all words from bubble
 				whoIsInBubble = []
 				#clear all words from tree

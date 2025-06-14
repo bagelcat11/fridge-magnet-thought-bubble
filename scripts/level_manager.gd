@@ -24,19 +24,54 @@ extends Node2D
 @onready var bubble_low_y = bubblePosition.y - Globals.word_h - bubblePadding
 @onready var bubble_high_y = bubblePosition.y + bubbleRect.size.y
 
+#SCREEN SHAKE VARS
+var shakeDecayRate = 10.0 #multiplier for lerping the shake strength to zero
+var shakeStrength = 0.0
+var defaultShakeStrength = 15.0
+
+#var homeBgPos = Vector2(6144.0, 480.02)
+#var homeBgPos = Vector2(8192, 480.02)
+#var homeBgPos = Vector2(8690, 480.02) #8192+2048-1550
+#var homeBgPos = Vector2(7694, 480.02)
+var homeBgPos = Vector2(9742, 480.02) #8192+1550
+#var homeBgPos = Vector2(10240, 480.02)
+
 var currentShaders = {}
 signal _send_player_home()
 
 func _ready() -> void:
+	$black_screen.visible = false
 	$word_timer.start(1.0) #delay from opening to first word spawning
 	outsideBackground.visible = false
+	homeBackground.visible = false
 	insideBackground.visible = true
-	outsideBackground.autoscroll.x = Globals.defaultScrollSpeed
-	$player.global_position = Vector2(1001, 722)
+	insideBackground.get_node("animatedsprite").play("room")
+	#outsideBackground.autoscroll.x = Globals.defaultScrollSpeed
+	$player.global_position = Globals.playerRoomPos
+	
+	#NOISE
+	#noise.seed = randi()
+	#noise.period = 2
 	
 func _physics_process(delta: float) -> void:
-	#print($background/outside_parallax2d/sprite/ColorRect/VisibleOnScreenNotifier2D.is_on_screen())
-	pass
+	if (Globals.stage == 0 && shakeStrength > 0.01):
+		shakeStrength = lerp(shakeStrength, 0.0, shakeDecayRate * delta)
+		var shakeOffset = get_random_offset()
+		self.position = shakeOffset
+		insideBackground.position = shakeOffset
+		#camera.offset = shake_offset
+
+#func get_noise_offset(delta: float, speed: float, strength: float) -> Vector2:
+	#noiseIndex += delta * speed
+	#return Vector2(
+		#noise.get_noise_2d(100, noiseIndex) * strength,
+		#0.0
+	#)
+func get_random_offset() -> Vector2:
+	return Vector2(
+		randf() * shakeStrength * 2 - shakeStrength,
+		randf() * shakeStrength * 2 - shakeStrength
+	)
 
 func _on_word_timer_timeout() -> void:	
 	#var bubbleColorRect = ColorRect.new()
@@ -82,11 +117,16 @@ func _on_word_timer_timeout() -> void:
 
 
 func _start_stage_1() -> void:
-	Globals.stage = 1
-	#TODO: play animation to fade to black->fade to outside
-	outsideBackground.visible = true
-	insideBackground.visible = false
-	$end_timer.start(Globals.walkTime)
+	Globals.stage = 0.5 #transition stage
+	$black_screen.visible = true
+	$black_screen/black_screen_animator.play("fade_in")
+	#outsideBackground.visible = true
+	#insideBackground.visible = false
+	#homeBackground.visible = true
+	#homeBackground.autoscroll.x = Globals.defaultScrollSpeed #TODO: make home bg update speed if necessary when obj change..?
+	#outsideBackground.autoscroll.x = Globals.defaultScrollSpeed
+	#$player.global_position = Globals.playerDefaultPos
+	#$end_timer.start(Globals.walkTime)
 
 
 func _scroll_background(speed: float) -> void:
@@ -122,6 +162,15 @@ func _go_home() -> void:
 	#stop words
 	$word_timer.stop()
 	#$end_timer.start(Globals.endDelayTime)
+	#free words
+	for word in get_tree().get_nodes_in_group("words"):
+		#currentShaders = {}
+		print(word)
+		if (!word.isObject):
+			if currentShaders.has(word.myAttributes[0]):
+				currentShaders[word.myAttributes[0]].queue_free()
+				currentShaders.erase(word.myAttributes[0])
+		word.queue_free()
 
 
 func _instantiate_shader(name: String, path: String) -> void:
@@ -138,12 +187,21 @@ func _free_shader(name: String) -> void:
 
 
 func _on_edge_marker_area_entered(area: Area2D) -> void:
-	print(area)
-	print(Globals.stage)
-	if (Globals.stage == 3):
-		print("home bg visible")
+	#print(area)
+	#print(Globals.stage)
+	if (area.name == "background_edge_marker" && Globals.stage == 3):
+		#print("home bg visible")
+		homeBackground.autoscroll.x = 0
+		#homeBackground.position = outsideBackground.position
+		#homeBackground.get_node("home").offset = homeBgPos
+		homeBackground.position = outsideBackground.position
+		#homeBackground.position = Vector2(0.0, 0.0)
+		#print(homeBackground.get_node("home").offset)
 		homeBackground.visible = true
 		homeBackground.autoscroll.x = -Globals.defaultScrollSpeed
+	elif (area.name == "homebg_edge_marker" && Globals.stage == 1 || Globals.stage == 2):
+		homeBackground.autoscroll.x = 0
+		homeBackground.visible = false
 
 
 func _on_door_area_entered(area: Area2D) -> void:
@@ -156,3 +214,32 @@ func _on_door_area_entered(area: Area2D) -> void:
 		$end.visible = true
 		#print("ee")
 		Globals.stage = 4
+
+#
+#func _on_background_edge_marker_area_entered(area: Area2D) -> void:
+	#print("sigh")
+	#print(area)
+
+
+func _shake_animation() -> void:
+	shakeStrength = defaultShakeStrength
+
+
+func _on_black_screen_animator_animation_finished(anim_name: StringName) -> void:
+	if (anim_name == "fade_in"):
+		Globals.stage = 1
+		outsideBackground.visible = true
+		insideBackground.visible = false
+		homeBackground.visible = true
+		homeBackground.autoscroll.x = Globals.defaultScrollSpeed #TODO: make home bg update speed if necessary when obj change..?
+		outsideBackground.autoscroll.x = Globals.defaultScrollSpeed
+		$player.global_position = Globals.playerDefaultPos
+		$end_timer.start(Globals.walkTime)
+		$black_screen/black_screen_animator.play("fade_out")
+	elif (anim_name == "fade_out"):
+		$black_screen.visible = false
+		$word_timer.start(Globals.wordSpawnTime)
+
+
+func _on_bubble__stop_word_spawning() -> void:
+	$word_timer.stop()
