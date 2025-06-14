@@ -18,7 +18,7 @@ void fragment() {
     // Intensify the spinning by increasing the multiplier
     float dynamic_offset = SCREEN_UV.y * 500.0; // Amplified from 50.0 to 500.0
 
-    COLOR.rgb += influence * hsv2rgb(vec3(((atan(pos.y, pos.x) + radians(dynamic_offset)) / TWO_PI) + 0.5, length(pos) * 5.0, 1.0) * 1.0);
+    COLOR.rgb += influence * hsv2rgb(vec3(((atan(pos.y, pos.x) + radians(dynamic_offset)) / TWO_PI) + 0.5, length(pos) * 5.0, 1.0) * TIME*0.1);
 	//COLOR.a = 0.1;
 }
 
