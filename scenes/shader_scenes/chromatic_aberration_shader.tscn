@@ -19,6 +19,7 @@ offset_bottom = 1080.0
 mouse_filter = 2
 
 [node name="test-subject" type="Sprite2D" parent="."]
+visible = false
 z_index = -2
 position = Vector2(593, 247)
 texture = ExtResource("2_sb7bw")
