@@ -48,6 +48,7 @@ func _ready() -> void:
 			$name.text = myAttributes[0]
 	
 	spawn_in_anim()
+	$spawn.play()
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and hasMouse:
@@ -58,10 +59,12 @@ func _input(event: InputEvent) -> void:
 			# drop shadow also??
 			pickupOffset = get_global_position() - get_global_mouse_position()
 			self.scale = Vector2(sizeScaleWhenPickedUp, sizeScaleWhenPickedUp)
+			$pickup.play()
 			if (Globals.stage == 1 || (Globals.stage == 2 && !isGoHomeWord)):
 				$Timer.stop()
 		else:
 			self.scale = Vector2(1, 1)
+			$putdown.play()
 			if (!isInBubble && (Globals.stage == 1 || (Globals.stage == 2 && !isGoHomeWord))):
 				$Timer.start(Globals.wordTimerTime)
 
@@ -71,6 +74,7 @@ func _physics_process(delta: float) -> void:
 		if (mousePosition.x > viewportSize.x || mousePosition.y > viewportSize.y || mousePosition.x < 0 || mousePosition.y < 0):
 			#if mouse outside of viewport
 			isPickedUp = false
+			$putdown.play()
 		else:
 			global_position = mousePosition + pickupOffset
 

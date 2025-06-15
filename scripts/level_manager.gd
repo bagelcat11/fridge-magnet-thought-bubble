@@ -120,6 +120,7 @@ func _start_stage_1() -> void:
 	Globals.stage = 0.5 #transition stage
 	$black_screen.visible = true
 	$black_screen/black_screen_animator.play("fade_in")
+	$ambience.play()
 	#outsideBackground.visible = true
 	#insideBackground.visible = false
 	#homeBackground.visible = true
@@ -199,8 +200,11 @@ func _on_door_area_entered(area: Area2D) -> void:
 			word.queue_free()
 		#show end screen
 		$end.visible = true
+		$dooropen.play()
+		$ambience.stop()
 		#print("ee")
 		Globals.stage = 4
+		
 
 #
 #func _on_background_edge_marker_area_entered(area: Area2D) -> void:
@@ -210,12 +214,14 @@ func _on_door_area_entered(area: Area2D) -> void:
 
 func _shake_animation() -> void:
 	shakeStrength = defaultShakeStrength
+	$bedshake.play()
 
 
 func _on_black_screen_animator_animation_finished(anim_name: StringName) -> void:
 	if (anim_name == "fade_in"):
 		#timer for length of black screen
 		$wait_timer.start(Globals.blackScreenTransitionTime)
+		$doorclose.play()
 	elif (anim_name == "fade_out"):
 		$black_screen.visible = false
 		$word_timer.start(Globals.wordSpawnTime)

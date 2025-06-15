@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://dcpjx25fo6rxo"]
+[gd_scene load_steps=28 format=3 uid="uid://dcpjx25fo6rxo"]
 
 [ext_resource type="Script" uid="uid://bdla10o6f8jed" path="res://scripts/level_manager.gd" id="1_6we3w"]
 [ext_resource type="PackedScene" uid="uid://bm3kj1wr3vtt7" path="res://scenes/bubble.tscn" id="1_ufxs0"]
@@ -12,6 +12,10 @@
 [ext_resource type="Texture2D" uid="uid://pxi07ifxr1vq" path="res://assets/house_background.png" id="8_iqu8w"]
 [ext_resource type="Texture2D" uid="uid://c6yxt46tp4yqg" path="res://assets/bedroom_1.png" id="11_fkrx8"]
 [ext_resource type="Texture2D" uid="uid://0dm152fsvq8s" path="res://assets/bedroom_2.png" id="12_mwgft"]
+[ext_resource type="AudioStream" uid="uid://ik45mx5xfes1" path="res://assets/sfx/bird_ambience.wav" id="13_mwgft"]
+[ext_resource type="AudioStream" uid="uid://ccfpix0p0xw2k" path="res://assets/sfx/shake.wav" id="14_adxub"]
+[ext_resource type="AudioStream" uid="uid://ch4mliugnx2yu" path="res://assets/sfx/door_close.wav" id="15_ff0s2"]
+[ext_resource type="AudioStream" uid="uid://bvivu8vxy867d" path="res://assets/sfx/door_open.wav" id="16_uk2yf"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_adxub"]
 shader = ExtResource("5_k5pu3")
@@ -245,6 +249,22 @@ color = Color(0, 0, 0, 1)
 libraries = {
 &"": SubResource("AnimationLibrary_ff0s2")
 }
+
+[node name="ambience" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("13_mwgft")
+
+[node name="bedshake" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("14_adxub")
+volume_db = -18.0
+pitch_scale = 1.13
+
+[node name="doorclose" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("15_ff0s2")
+volume_db = -6.0
+
+[node name="dooropen" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("16_uk2yf")
+volume_db = -6.0
 
 [connection signal="_send_player_home" from="." to="player" method="_on_main_level__send_player_home"]
 [connection signal="_free_shader" from="bubble" to="." method="_free_shader"]
