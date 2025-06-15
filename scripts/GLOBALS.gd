@@ -39,7 +39,9 @@ var objects = [
 	["mirror", defaultScrollSpeed, "Mirror"],
 	["mouse_bike", defaultScrollSpeed, "Bike"],
 	["propeller_hat", defaultScrollSpeed, "Hat"],
-	["undergarments", defaultScrollSpeed, "Underwear"]
+	["undergarments", defaultScrollSpeed, "Underwear"],
+	["cats", defaultScrollSpeed, "Cats"],
+	["horse", 600.0, "Horse"]
 	
 	#["temp_fumoball_default", false]
 ]
