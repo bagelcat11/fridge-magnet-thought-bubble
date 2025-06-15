@@ -1,4 +1,4 @@
-[gd_scene load_steps=62 format=3 uid="uid://bod7r823y2ysu"]
+[gd_scene load_steps=64 format=3 uid="uid://bod7r823y2ysu"]
 
 [ext_resource type="Script" uid="uid://bh4ppn2ksqwp8" path="res://scripts/player.gd" id="1_dqkch"]
 [ext_resource type="Texture2D" uid="uid://cd8i5r6blewy3" path="res://assets/person/getting_up/Person_Getting_Up1.png" id="2_4r5pv"]
@@ -56,6 +56,8 @@
 [ext_resource type="Texture2D" uid="uid://c0jbqh8w13suv" path="res://assets/resized_forms/bike/_0000s_0025_Bike2.png" id="32_1da1t"]
 [ext_resource type="Texture2D" uid="uid://dlb40f4g10tmp" path="res://assets/resized_forms/_0000s_0008_propeller-hat.png" id="46_p21yu"]
 [ext_resource type="Texture2D" uid="uid://dl3r0n0evbx00" path="res://assets/resized_forms/_0000s_0014_undergarments.png" id="50_irpag"]
+[ext_resource type="AudioStream" uid="uid://cdjij4advh3t7" path="res://assets/sfx/transform.wav" id="57_8svfe"]
+[ext_resource type="AudioStream" uid="uid://dnalwphh5mrlm" path="res://assets/sfx/alien.wav" id="58_2a3c5"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_smehm"]
 animations = [{
@@ -428,5 +430,13 @@ libraries = {
 [node name="player_collision_shape" type="CollisionShape2D" parent="player_area"]
 position = Vector2(0, 3)
 shape = SubResource("RectangleShape2D_6e8lb")
+
+[node name="transform" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("57_8svfe")
+volume_db = -16.0
+
+[node name="movement_sfx" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("58_2a3c5")
+volume_db = -18.0
 
 [connection signal="animation_finished" from="forms" to="." method="_on_forms_animation_finished"]

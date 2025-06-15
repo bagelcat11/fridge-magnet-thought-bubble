@@ -14,7 +14,11 @@ func _physics_process(delta: float) -> void:
 
 func change(form: Array):
 	#print("trying to play ", form[0])
+	print("changing to", form)
 	$forms.play(form[0])
+	$transform.play()
+	$movement_sfx.stream = form[3]
+	$movement_sfx.play(0)
 	#print("playing ", $forms.animation)
 	if $forms.get_sprite_frames().get_frame_count($forms.animation) == 1:
 		$hop_animator.play("hop")
@@ -28,7 +32,7 @@ func _get_up() -> void:
 
 func _on_forms_animation_finished() -> void:
 	if ($forms.animation == "person_getting_up"):
-		$forms.play("person_walking")
+		change(Globals.default_obj)
 		_start_stage_1.emit()
 		#print("start stage 1 signal emitted")
 		

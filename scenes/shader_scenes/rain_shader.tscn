@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://cvqoxda8eygb"]
+[gd_scene load_steps=4 format=3 uid="uid://cvqoxda8eygb"]
 
 [ext_resource type="Shader" uid="uid://cqagjepa5marq" path="res://shaders/rain.gdshader" id="1_xexn0"]
+[ext_resource type="AudioStream" uid="uid://ckyldyoml7pje" path="res://assets/sfx/rain.wav" id="2_qesml"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qesml"]
 shader = ExtResource("1_xexn0")
@@ -18,3 +19,8 @@ material = SubResource("ShaderMaterial_qesml")
 offset_right = 1920.0
 offset_bottom = 1080.0
 mouse_filter = 2
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_qesml")
+volume_db = -12.0
+autoplay = true
