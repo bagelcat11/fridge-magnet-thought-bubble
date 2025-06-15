@@ -1,11 +1,10 @@
-[gd_scene load_steps=28 format=3 uid="uid://dcpjx25fo6rxo"]
+[gd_scene load_steps=26 format=3 uid="uid://dcpjx25fo6rxo"]
 
 [ext_resource type="Script" uid="uid://bdla10o6f8jed" path="res://scripts/level_manager.gd" id="1_6we3w"]
 [ext_resource type="PackedScene" uid="uid://bm3kj1wr3vtt7" path="res://scenes/bubble.tscn" id="1_ufxs0"]
 [ext_resource type="PackedScene" uid="uid://bod7r823y2ysu" path="res://scenes/player.tscn" id="2_6we3w"]
 [ext_resource type="PackedScene" uid="uid://dwoodyqrbkxhj" path="res://scenes/end.tscn" id="2_k5pu3"]
 [ext_resource type="Shader" uid="uid://cmqho0rmc6s3x" path="res://shaders/woozy2.gdshader" id="5_k5pu3"]
-[ext_resource type="Shader" uid="uid://pqntc5rigq5x" path="res://shaders/wired.gdshader" id="6_k5pu3"]
 [ext_resource type="Texture2D" uid="uid://mcuggcbec2yc" path="res://assets/mirrored_outside_background.png" id="7_k5pu3"]
 [ext_resource type="Texture2D" uid="uid://dbof1uhyni8mm" path="res://assets/temp_room_asset.jpg" id="7_u2c82"]
 [ext_resource type="Texture2D" uid="uid://c1ns35kal7j0p" path="res://assets/mirrored_outside_house_background.png" id="8_5fr2l"]
@@ -24,15 +23,6 @@ shader_parameter/thing1 = 0.6
 shader_parameter/thing2 = 0.6
 shader_parameter/thing3 = 0.8
 shader_parameter/scale = 1.0
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_mwgft"]
-shader = ExtResource("6_k5pu3")
-shader_parameter/threshold = 0.5
-shader_parameter/smoothness = 0.05
-shader_parameter/bg_color = Color(0, 0, 0, 1)
-shader_parameter/fg_color = Color(1, 1, 1, 1)
-shader_parameter/invert = true
-shader_parameter/intensity = 1.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mwgft"]
 size = Vector2(0.94339, 20)
@@ -135,12 +125,6 @@ material = SubResource("ShaderMaterial_adxub")
 offset_right = 1934.0
 offset_bottom = 1105.0
 
-[node name="ColorRect" type="ColorRect" parent="."]
-visible = false
-material = SubResource("ShaderMaterial_mwgft")
-offset_right = 1925.0
-offset_bottom = 1096.0
-
 [node name="background" type="ParallaxBackground" parent="."]
 scroll_offset = Vector2(1, 0)
 scroll_base_offset = Vector2(1, 0)
@@ -165,6 +149,7 @@ position = Vector2(0.47168, 0)
 shape = SubResource("RectangleShape2D_mwgft")
 
 [node name="ColorRect" type="ColorRect" parent="background/outside_parallax2d/sprite/background_edge_marker"]
+visible = false
 offset_right = 1.0
 offset_bottom = 10.0
 metadata/_edit_use_anchors_ = true
@@ -209,6 +194,7 @@ position = Vector2(0.471698, 0)
 shape = SubResource("RectangleShape2D_5fr2l")
 
 [node name="ColorRect" type="ColorRect" parent="background/home_parallax2d/home/homebg_edge_marker"]
+visible = false
 offset_right = 1.0
 offset_bottom = 10.0
 metadata/_edit_use_anchors_ = true

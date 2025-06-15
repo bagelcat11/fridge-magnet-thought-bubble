@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://bok25w18yse23"]
+
+[ext_resource type="Shader" uid="uid://pqntc5rigq5x" path="res://shaders/wired.gdshader" id="1_kqgne"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ryuj7"]
+shader = ExtResource("1_kqgne")
+shader_parameter/threshold = 0.5
+shader_parameter/smoothness = 0.05
+shader_parameter/bg_color = Color(0, 0, 0, 1)
+shader_parameter/fg_color = Color(1, 1, 1, 1)
+shader_parameter/invert = true
+shader_parameter/intensity = 1.0
+
+[node name="wired_shader" type="Node2D"]
+z_index = 5
+
+[node name="wired_rect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_ryuj7")
+offset_right = 1925.0
+offset_bottom = 1096.0
+mouse_filter = 2

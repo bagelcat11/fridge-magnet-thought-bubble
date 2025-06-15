@@ -5,9 +5,9 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sb7bw"]
 shader = ExtResource("1_atke1")
-shader_parameter/r_displacement = Vector2(3, 0)
+shader_parameter/r_displacement = Vector2(10, 0)
 shader_parameter/g_displacement = Vector2(0, 0)
-shader_parameter/b_displacement = Vector2(-3, 0)
+shader_parameter/b_displacement = Vector2(-10, 0)
 
 [node name="chromatic_aberration_shader" type="Node2D"]
 z_index = 5

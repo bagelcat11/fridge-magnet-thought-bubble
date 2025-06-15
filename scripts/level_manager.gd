@@ -155,23 +155,29 @@ func _go_home() -> void:
 		#currentShaders = {}
 		print(word)
 		if (!word.isObject):
-			if currentShaders.has(word.myAttributes[0]):
-				currentShaders[word.myAttributes[0]].queue_free()
-				currentShaders.erase(word.myAttributes[0])
+			var name = word.myAttributes[0]
+			if currentShaders.has(name):
+				for shader in currentShaders[name]:
+					currentShaders[name].pop_front().queue_free()
+				currentShaders.erase(name)
 		word.queue_free()
 
 
 func _instantiate_shader(name: String, path: String) -> void:
 	var shaderScene = load(path)
 	var newShader = shaderScene.instantiate()
-	currentShaders[name] = newShader
+	if (currentShaders.has(name)):
+		currentShaders[name].append(newShader)
+	else:
+		currentShaders[name] = [newShader]
 	add_child(newShader)
 
 
 func _free_shader(name: String) -> void:
 	if currentShaders.has(name):
-		currentShaders[name].queue_free()
-		currentShaders.erase(name)
+		currentShaders[name].pop_front().queue_free()
+		if (currentShaders[name].is_empty()):
+			currentShaders.erase(name)
 
 
 func _on_edge_marker_area_entered(area: Area2D) -> void:
@@ -222,6 +228,9 @@ func _on_black_screen_animator_animation_finished(anim_name: StringName) -> void
 		#timer for length of black screen
 		$wait_timer.start(Globals.blackScreenTransitionTime)
 		$doorclose.play()
+		#clear all words from tree
+		for word in get_tree().get_nodes_in_group("words"):
+			word.queue_free()
 	elif (anim_name == "fade_out"):
 		$black_screen.visible = false
 		$word_timer.start(Globals.wordSpawnTime)

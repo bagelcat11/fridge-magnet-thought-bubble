@@ -22,13 +22,14 @@ var movement_step_heavy = preload("res://assets/sfx/step_heavy.wav")
 var movement_step_medium = preload("res://assets/sfx/step_medium.wav")
 var movement_step_light = preload("res://assets/sfx/step_light.wav")
 var movement_worm = preload("res://assets/sfx/worm.wav")
+var movement_snake = preload("res://assets/sfx/snake.wav")
 
 var default_obj = ["person_walking", defaultScrollSpeed, "Person", movement_step_medium]
 
 var objects = [
 	# [ string ObjectName, float bgScrollSpeed (px/s), string DisplayName, string SFX_Path]
-	#["temp_fumo1", -100, ""],
-	#["temp_fumo2", -200, ""],
+	["temp_fumo1", -100, ""],
+	["temp_fumo2", -200, ""],
 	["alien", defaultScrollSpeed, "Alien", movement_alien],
 	["apple", defaultScrollSpeed, "Apple", movement_step_light],
 	["bed", defaultScrollSpeed, "Bed", movement_metal],
@@ -46,11 +47,12 @@ var objects = [
 	["inchworm", defaultScrollSpeed, "Inchworm", movement_worm],
 	["meat", defaultScrollSpeed, "Dinner", movement_step_light],
 	["mirror", defaultScrollSpeed, "Mirror", movement_metal],
-	["mouse_bike", defaultScrollSpeed, "Bike", movement_bike],
+	["mouse_bike", 500, "Bike", movement_bike],
 	["propeller_hat", defaultScrollSpeed, "Hat", movement_step_light],
 	["undergarments", defaultScrollSpeed, "Underwear", movement_step_light],
-	["cats", defaultScrollSpeed, "Cats", movement_bike],
-	["horse", 600.0, "Horse", movement_step_heavy]
+	["cats", 400, "Cats", movement_bike],
+	["horse", 600.0, "Horse", movement_step_heavy],
+	["snake", defaultScrollSpeed, "Snake", movement_snake]
 	
 	#["temp_fumoball_default", false]
 ]
@@ -63,7 +65,10 @@ var feelings = [
 	["Trapped", "res://scenes/shader_scenes/trapped_shader.tscn", 1.0],
 	["Woozy", "res://scenes/shader_scenes/woozy_shader.tscn", 1.0],
 	["Spiraling", "res://scenes/shader_scenes/purple_swirl_shader.tscn", 1.0],
-	["Reeling", "res://scenes/shader_scenes/chromatic_aberration_shader.tscn", 1.0]
+	["Reeling", "res://scenes/shader_scenes/chromatic_aberration_shader_2.tscn", 1.0],
+	["Tripping", "res://scenes/shader_scenes/chromatic_aberration_shader.tscn", 1.0],
+	["Wired", "res://scenes/shader_scenes/wired_shader.tscn", 1.0],
+	["Mellow", "res://scenes/shader_scenes/mellow_shader.tscn", 1.0]
 ]
 
 var move_words = [

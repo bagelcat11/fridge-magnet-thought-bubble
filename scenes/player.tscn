@@ -1,4 +1,4 @@
-[gd_scene load_steps=64 format=3 uid="uid://bod7r823y2ysu"]
+[gd_scene load_steps=67 format=3 uid="uid://bod7r823y2ysu"]
 
 [ext_resource type="Script" uid="uid://bh4ppn2ksqwp8" path="res://scripts/player.gd" id="1_dqkch"]
 [ext_resource type="Texture2D" uid="uid://cd8i5r6blewy3" path="res://assets/person/getting_up/Person_Getting_Up1.png" id="2_4r5pv"]
@@ -56,6 +56,9 @@
 [ext_resource type="Texture2D" uid="uid://c0jbqh8w13suv" path="res://assets/resized_forms/bike/_0000s_0025_Bike2.png" id="32_1da1t"]
 [ext_resource type="Texture2D" uid="uid://dlb40f4g10tmp" path="res://assets/resized_forms/_0000s_0008_propeller-hat.png" id="46_p21yu"]
 [ext_resource type="Texture2D" uid="uid://dl3r0n0evbx00" path="res://assets/resized_forms/_0000s_0014_undergarments.png" id="50_irpag"]
+[ext_resource type="Texture2D" uid="uid://bciyfvtx71t8k" path="res://assets/resized_forms/snake/_0000s_0042_snake_1.png" id="53_au7lq"]
+[ext_resource type="Texture2D" uid="uid://b7mykapk473as" path="res://assets/resized_forms/snake/_0000s_0041_snake_2.png" id="54_nubpm"]
+[ext_resource type="Texture2D" uid="uid://bdu3u1ch7fs8g" path="res://assets/resized_forms/snake/_0000s_0040_snake_3.png" id="55_ua5cf"]
 [ext_resource type="AudioStream" uid="uid://cdjij4advh3t7" path="res://assets/sfx/transform.wav" id="57_8svfe"]
 [ext_resource type="AudioStream" uid="uid://dnalwphh5mrlm" path="res://assets/sfx/alien.wav" id="58_2a3c5"]
 
@@ -341,6 +344,20 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("53_au7lq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("54_nubpm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("55_ua5cf")
+}],
+"loop": true,
+"name": &"snake",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": ExtResource("2_qlg0r")
 }],
 "loop": true,
@@ -418,7 +435,8 @@ script = ExtResource("1_dqkch")
 
 [node name="forms" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_smehm")
-animation = &"cats"
+animation = &"snake"
+frame_progress = 0.226294
 
 [node name="hop_animator" type="AnimationPlayer" parent="."]
 libraries = {
