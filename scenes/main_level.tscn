@@ -224,7 +224,7 @@ position = Vector2(960, 540)
 sprite_frames = SubResource("SpriteFrames_adxub")
 animation = &"room"
 
-[node name="end_timer" type="Timer" parent="."]
+[node name="wait_timer" type="Timer" parent="."]
 one_shot = true
 
 [node name="edge_marker" type="Area2D" parent="."]
@@ -258,6 +258,6 @@ libraries = {
 [connection signal="timeout" from="word_timer" to="." method="_on_word_timer_timeout"]
 [connection signal="area_entered" from="background/outside_parallax2d/sprite/background_edge_marker" to="." method="_on_background_edge_marker_area_entered"]
 [connection signal="area_entered" from="background/home_parallax2d/home/door_area" to="." method="_on_door_area_entered"]
-[connection signal="timeout" from="end_timer" to="." method="_on_end_timer_timeout"]
+[connection signal="timeout" from="wait_timer" to="." method="_on_wait_timer_timeout"]
 [connection signal="area_entered" from="edge_marker" to="." method="_on_edge_marker_area_entered"]
 [connection signal="animation_finished" from="black_screen/black_screen_animator" to="." method="_on_black_screen_animator_animation_finished"]

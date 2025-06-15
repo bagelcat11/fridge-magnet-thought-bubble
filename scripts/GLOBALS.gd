@@ -6,6 +6,7 @@ var wordTimerTime = 15.0
 var wordSpawnTime = 5.0
 var defaultScrollSpeed = 300.0
 var walkTime = 20.0 #in seconds, time before 'go home' spawns (will be longer, short for testing)
+var blackScreenTransitionTime = 1.0
 #var endDelayTime = 100.0 #in seconds (delay after go home before game ends)
 var goHomeWordSpawned = false
 var word_w = 124

@@ -133,19 +133,6 @@ func _scroll_background(speed: float) -> void:
 	outsideBackground.autoscroll.x = speed
 
 
-func _on_end_timer_timeout() -> void:
-	if (Globals.stage == 1):
-		Globals.stage = 2
-	#elif (Globals.stage == 2):
-		##delete the words
-		#for word in get_tree().get_nodes_in_group("words"):
-			#word.queue_free()
-		##show end screen
-		#$end.visible = true
-		##print("ee")
-		#Globals.stage = 4
-
-
 func _go_home() -> void:
 	#mirror player
 	#do we want to erase all the words? 
@@ -227,15 +214,8 @@ func _shake_animation() -> void:
 
 func _on_black_screen_animator_animation_finished(anim_name: StringName) -> void:
 	if (anim_name == "fade_in"):
-		Globals.stage = 1
-		outsideBackground.visible = true
-		insideBackground.visible = false
-		homeBackground.visible = true
-		homeBackground.autoscroll.x = Globals.defaultScrollSpeed #TODO: make home bg update speed if necessary when obj change..?
-		outsideBackground.autoscroll.x = Globals.defaultScrollSpeed
-		$player.global_position = Globals.playerDefaultPos
-		$end_timer.start(Globals.walkTime)
-		$black_screen/black_screen_animator.play("fade_out")
+		#timer for length of black screen
+		$wait_timer.start(Globals.blackScreenTransitionTime)
 	elif (anim_name == "fade_out"):
 		$black_screen.visible = false
 		$word_timer.start(Globals.wordSpawnTime)
@@ -243,3 +223,18 @@ func _on_black_screen_animator_animation_finished(anim_name: StringName) -> void
 
 func _on_bubble__stop_word_spawning() -> void:
 	$word_timer.stop()
+
+
+func _on_wait_timer_timeout() -> void:
+	if (Globals.stage == 1):
+		Globals.stage = 2
+	elif (Globals.stage == 0.5):
+		Globals.stage = 1
+		outsideBackground.visible = true
+		insideBackground.visible = false
+		homeBackground.visible = true
+		homeBackground.autoscroll.x = Globals.defaultScrollSpeed #TODO: make home bg update speed if necessary when obj change..?
+		outsideBackground.autoscroll.x = Globals.defaultScrollSpeed
+		$player.global_position = Globals.playerDefaultPos
+		$wait_timer.start(Globals.walkTime)
+		$black_screen/black_screen_animator.play("fade_out")
