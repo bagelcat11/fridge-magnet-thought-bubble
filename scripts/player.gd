@@ -43,3 +43,8 @@ func _on_main_level__send_player_home() -> void:
 	change(Globals.default_obj)
 	#$forms.play("person_walking")
 	#print("going home")
+	self.position.x -= 100
+
+
+func _end_player() -> void:
+	$movement_sfx.stop()

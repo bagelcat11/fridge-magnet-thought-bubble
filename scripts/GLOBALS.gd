@@ -2,10 +2,10 @@ extends Node
 
 signal change_form(form: Array)
 var stage = 0 # 0=bedroom, 1=walking, 2=going home Appears, 3=walking home
-var wordTimerTime = 15.0
+var wordTimerTime = 10.0
 var wordSpawnTime = 5.0
 var defaultScrollSpeed = 300.0
-var walkTime = 20.0 #in seconds, time before 'go home' spawns (will be longer, short for testing)
+var walkTime = 10.0 #in seconds, time before 'go home' spawns (will be longer, short for testing)
 var blackScreenTransitionTime = 1.0
 #var endDelayTime = 100.0 #in seconds (delay after go home before game ends)
 var goHomeWordSpawned = false
@@ -28,8 +28,8 @@ var default_obj = ["person_walking", defaultScrollSpeed, "Person", movement_step
 
 var objects = [
 	# [ string ObjectName, float bgScrollSpeed (px/s), string DisplayName, string SFX_Path]
-	["temp_fumo1", -100, ""],
-	["temp_fumo2", -200, ""],
+	#["temp_fumo1", -100, ""],
+	#["temp_fumo2", -200, ""],
 	["alien", defaultScrollSpeed, "Alien", movement_alien],
 	["apple", defaultScrollSpeed, "Apple", movement_step_light],
 	["bed", defaultScrollSpeed, "Bed", movement_metal],
@@ -41,7 +41,7 @@ var objects = [
 	["chair", defaultScrollSpeed, "Chair", movement_step_medium],
 	["earth", defaultScrollSpeed, "Earth", movement_step_heavy],
 	["flower", defaultScrollSpeed, "Flower", movement_step_heavy],
-	["frog_table", defaultScrollSpeed, "Table", movement_step_heavy],
+	["frog_table", defaultScrollSpeed, "Table", movement_snake],
 	["hockey_stick", defaultScrollSpeed, "Hockey", movement_step_medium],
 	["homework", defaultScrollSpeed, "Homework", movement_step_light],
 	["inchworm", defaultScrollSpeed, "Inchworm", movement_worm],
