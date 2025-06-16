@@ -5,7 +5,7 @@ var stage = 0 # 0=bedroom, 1=walking, 2=going home Appears, 3=walking home
 var wordTimerTime = 10.0
 var wordSpawnTime = 5.0
 var defaultScrollSpeed = 300.0
-var walkTime = 10.0 #in seconds, time before 'go home' spawns (will be longer, short for testing)
+var walkTime = 60.0 #in seconds, time before 'go home' spawns (will be longer, short for testing)
 var blackScreenTransitionTime = 1.0
 #var endDelayTime = 100.0 #in seconds (delay after go home before game ends)
 var goHomeWordSpawned = false
@@ -52,7 +52,8 @@ var objects = [
 	["undergarments", defaultScrollSpeed, "Underwear", movement_step_light],
 	["cats", 400, "Cats", movement_bike],
 	["horse", 600.0, "Horse", movement_step_heavy],
-	["snake", defaultScrollSpeed, "Snake", movement_snake]
+	["snake", defaultScrollSpeed, "Snake", movement_snake],
+	["couch", defaultScrollSpeed, "Couch", movement_step_heavy]
 	
 	#["temp_fumoball_default", false]
 ]
@@ -72,7 +73,8 @@ var feelings = [
 	["Dizzy", "res://scenes/shader_scenes/dizzy_shader.tscn", 1.0],
 	["Fuzzy", "res://scenes/shader_scenes/fuzzy_shader.tscn", 1.0],
 	["Lethargic", "res://scenes/shader_scenes/lethargic_shader.tscn", 1.0],
-	["Electric", "res://scenes/shader_scenes/electric_shader.tscn", 1.0]
+	["Electric", "res://scenes/shader_scenes/electric_shader.tscn", 1.0],
+	["Sad", "res://scenes/shader_scenes/sad_shader.tscn", 1.0]
 ]
 
 var move_words = [

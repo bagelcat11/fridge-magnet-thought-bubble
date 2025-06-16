@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://cbhyrh5sx5mg3"]
+[gd_scene load_steps=6 format=3 uid="uid://cbhyrh5sx5mg3"]
 
 [ext_resource type="Shader" uid="uid://qxdb38rt1euy" path="res://shaders/fuzzy1.gdshader" id="1_0ff0j"]
 [ext_resource type="Shader" uid="uid://c6du3i4ycwba0" path="res://shaders/fuzzy2.gdshader" id="2_oegrq"]
+[ext_resource type="AudioStream" uid="uid://dk4jqe4swa7po" path="res://assets/sfx/static.wav" id="3_oegrq"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_n1pnw"]
 shader = ExtResource("1_0ff0j")
@@ -29,3 +30,8 @@ material = SubResource("ShaderMaterial_3myvv")
 offset_right = 1925.0
 offset_bottom = 1096.0
 mouse_filter = 2
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_oegrq")
+volume_db = -25.0
+autoplay = true
