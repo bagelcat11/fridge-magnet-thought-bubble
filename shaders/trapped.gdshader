@@ -1,9 +1,9 @@
 shader_type canvas_item;
 render_mode blend_mul;
 
-uniform float radius = 1.0;
-uniform float speed : hint_range(0.0, 10.0) = 1.0;
-uniform vec4 effect_color : source_color = vec4(0.251, 0.0, 0.0, 1.0);
+uniform float radius = 0.55;
+uniform float speed : hint_range(0.0, 10.0) = 3.0;
+uniform vec4 effect_color : source_color = vec4(0.251, 0.0, 0.0, 1.);
 
 float snoise(vec3 uv, float res)
 {

@@ -4,8 +4,8 @@
 [ext_resource type="PackedScene" uid="uid://bm3kj1wr3vtt7" path="res://scenes/bubble.tscn" id="1_ufxs0"]
 [ext_resource type="PackedScene" uid="uid://bod7r823y2ysu" path="res://scenes/player.tscn" id="2_6we3w"]
 [ext_resource type="PackedScene" uid="uid://dwoodyqrbkxhj" path="res://scenes/end.tscn" id="2_k5pu3"]
-[ext_resource type="Shader" uid="uid://cmqho0rmc6s3x" path="res://shaders/woozy2.gdshader" id="5_k5pu3"]
-[ext_resource type="Shader" uid="uid://pqntc5rigq5x" path="res://shaders/wired.gdshader" id="6_k5pu3"]
+[ext_resource type="Shader" uid="uid://dk5p3vib1ve08" path="res://shaders/dizzy2.gdshader" id="5_uk2yf"]
+[ext_resource type="Shader" uid="uid://dmghbp5p760yd" path="res://shaders/dizzy1.gdshader" id="6_ondrs"]
 [ext_resource type="Texture2D" uid="uid://mcuggcbec2yc" path="res://assets/mirrored_outside_background.png" id="7_k5pu3"]
 [ext_resource type="Texture2D" uid="uid://dbof1uhyni8mm" path="res://assets/temp_room_asset.jpg" id="7_u2c82"]
 [ext_resource type="Texture2D" uid="uid://c1ns35kal7j0p" path="res://assets/mirrored_outside_house_background.png" id="8_5fr2l"]
@@ -18,21 +18,24 @@
 [ext_resource type="AudioStream" uid="uid://bvivu8vxy867d" path="res://assets/sfx/door_open.wav" id="16_uk2yf"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_adxub"]
-shader = ExtResource("5_k5pu3")
-shader_parameter/stretch = 0.8
-shader_parameter/thing1 = 0.6
-shader_parameter/thing2 = 0.6
-shader_parameter/thing3 = 0.8
-shader_parameter/scale = 1.0
+shader = ExtResource("5_uk2yf")
+shader_parameter/fish_intensity = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mwgft"]
-shader = ExtResource("6_k5pu3")
-shader_parameter/threshold = 0.5
-shader_parameter/smoothness = 0.05
-shader_parameter/bg_color = Color(0, 0, 0, 1)
-shader_parameter/fg_color = Color(1, 1, 1, 1)
-shader_parameter/invert = true
-shader_parameter/intensity = 1.0
+shader = ExtResource("6_ondrs")
+shader_parameter/time_speed = 1.0
+shader_parameter/distortion_strength = 0.5
+shader_parameter/max_distortion_strength = 2.0
+shader_parameter/separation_strength = 0.5
+shader_parameter/distortion_size = 10.0
+shader_parameter/background_blur_strength = 0.0
+shader_parameter/color1 = Color(1, 0, 0, 1)
+shader_parameter/color2 = Color(0, 1, 0, 1)
+shader_parameter/color3 = Color(0, 0, 1, 1)
+shader_parameter/background_color = Color(0, 0, 0, 1)
+shader_parameter/rotation_time = 10.0
+shader_parameter/enable_rotation = true
+shader_parameter/show_text = true
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mwgft"]
 size = Vector2(0.94339, 20)
@@ -130,13 +133,11 @@ position = Vector2(953, 552)
 [node name="word_timer" type="Timer" parent="."]
 
 [node name="ColorRect2" type="ColorRect" parent="."]
-visible = false
 material = SubResource("ShaderMaterial_adxub")
 offset_right = 1934.0
 offset_bottom = 1105.0
 
 [node name="ColorRect" type="ColorRect" parent="."]
-visible = false
 material = SubResource("ShaderMaterial_mwgft")
 offset_right = 1925.0
 offset_bottom = 1096.0
