@@ -68,7 +68,11 @@ var feelings = [
 	["Reeling", "res://scenes/shader_scenes/chromatic_aberration_shader_2.tscn", 1.0],
 	["Tripping", "res://scenes/shader_scenes/chromatic_aberration_shader.tscn", 1.0],
 	["Wired", "res://scenes/shader_scenes/wired_shader.tscn", 1.0],
-	["Mellow", "res://scenes/shader_scenes/mellow_shader.tscn", 1.0]
+	["Mellow", "res://scenes/shader_scenes/mellow_shader.tscn", 1.0],
+	["Dizzy", "res://scenes/shader_scenes/dizzy_shader.tscn", 1.0],
+	["Fuzzy", "res://scenes/shader_scenes/fuzzy_shader.tscn", 1.0],
+	["Lethargic", "res://scenes/shader_scenes/lethargic_shader.tscn", 1.0],
+	["Electric", "res://scenes/shader_scenes/electric_shader.tscn", 1.0]
 ]
 
 var move_words = [

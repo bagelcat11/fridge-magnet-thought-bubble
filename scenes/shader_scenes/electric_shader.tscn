@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://b5x7g5qw4kc8h"]
+
+[ext_resource type="Shader" uid="uid://45dhfsd2qtw" path="res://shaders/electric.gdshader" id="1_rofyg"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_f4o8i"]
+shader = ExtResource("1_rofyg")
+shader_parameter/shake_power = 0.005
+shader_parameter/shake_rate = 0.2
+shader_parameter/shake_speed = 5.0
+shader_parameter/shake_block_size = 30.5
+shader_parameter/shake_color_rate = 0.01
+
+[node name="electric_shader" type="Node2D"]
+z_index = 5
+
+[node name="electric" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_f4o8i")
+offset_right = 1934.0
+offset_bottom = 1105.0
+mouse_filter = 2

@@ -23,14 +23,12 @@ shader_parameter/scale = 1.0
 z_index = 5
 
 [node name="woozyrect" type="ColorRect" parent="."]
-z_index = 9
 material = SubResource("ShaderMaterial_xrc2d")
 offset_right = 1918.0
 offset_bottom = 1076.0
 mouse_filter = 2
 
 [node name="woozyrect2" type="ColorRect" parent="."]
-z_index = 9
 material = SubResource("ShaderMaterial_7k2rj")
 offset_right = 1918.0
 offset_bottom = 1076.0
