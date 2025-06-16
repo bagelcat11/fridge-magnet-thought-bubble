@@ -49,3 +49,5 @@ void fragment() {
 
     COLOR = vec4(colour.rgb, output);
 }
+
+//from https://godotshaders.com/shader/simple-rain-snow-shader/

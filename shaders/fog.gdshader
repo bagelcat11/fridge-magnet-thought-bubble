@@ -23,3 +23,5 @@ void fragment() {
 //	// Called for every pixel for every light affecting the CanvasItem.
 //	// Uncomment to replace the default light processing function with this one.
 //}
+
+//from https://www.youtube.com/watch?v=C_N1Wzr1KLU&ab_channel=FencerDevLog

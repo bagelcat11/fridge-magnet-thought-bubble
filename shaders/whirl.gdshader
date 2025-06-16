@@ -47,3 +47,5 @@ void fragment() {
 //	// Called for every pixel for every light affecting the CanvasItem.
 //	// Uncomment to replace the default light processing function with this one.
 //}
+
+//from https://github.com/godotengine/godot-demo-projects/blob/3.5-9e68af3/2d/screen_space_shaders/shaders/whirl.shader

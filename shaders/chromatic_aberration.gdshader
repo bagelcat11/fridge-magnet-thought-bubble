@@ -28,3 +28,5 @@ void fragment()
 
 	COLOR = vec4(r, g, b, 1.0);
 }
+
+//from https://godotshaders.com/shader/just-chromatic-aberration/

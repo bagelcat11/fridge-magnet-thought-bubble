@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://chxis2cxkf7qm"]
 
-[ext_resource type="Shader" uid="uid://dhaq3wb7hnr2l" path="res://shaders/woozy1.gdshader" id="1_ploxm"]
+[ext_resource type="Shader" uid="uid://dhaq3wb7hnr2l" path="res://shaders/woozy.gdshader" id="1_ploxm"]
 [ext_resource type="Shader" uid="uid://cmqho0rmc6s3x" path="res://shaders/woozy2.gdshader" id="2_sd62p"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xrc2d"]
