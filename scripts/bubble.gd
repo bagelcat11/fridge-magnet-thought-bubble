@@ -44,9 +44,6 @@ func _on_word_area_area_entered(area: Area2D) -> void:
 				_stop_word_spawning.emit()
 				#clear all words from bubble
 				whoIsInBubble = []
-				#clear all words from tree
-				for word in get_tree().get_nodes_in_group("words"):
-					word.queue_free()
 		elif (Globals.stage == 1 || Globals.stage == 2):
 			if mag.isGoHomeWord:
 				_go_home.emit()

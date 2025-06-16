@@ -1,6 +1,13 @@
-[gd_scene format=3 uid="uid://dwoodyqrbkxhj"]
+[gd_scene load_steps=6 format=3 uid="uid://dwoodyqrbkxhj"]
+
+[ext_resource type="Script" uid="uid://cxvcmodtfhb2j" path="res://scripts/end.gd" id="1_3d26k"]
+[ext_resource type="Texture2D" uid="uid://bm8shunrr0mo3" path="res://assets/magnet.png" id="2_p7m4f"]
+[ext_resource type="Texture2D" uid="uid://yf8ly1ml6p7b" path="res://assets/bubble.png" id="3_p7m4f"]
+[ext_resource type="AudioStream" uid="uid://b7epn0h535i16" path="res://assets/sfx/magnet_spawnpop.wav" id="4_bvfni"]
+[ext_resource type="AudioStream" uid="uid://cl0duqo3si1iv" path="res://assets/sfx/magnet_putdown.wav" id="5_s4tl2"]
 
 [node name="end" type="Node2D"]
+script = ExtResource("1_3d26k")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_right = 1972.0
@@ -15,3 +22,47 @@ offset_bottom = 768.0
 theme_override_colors/default_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/normal_font_size = 51
 text = "welcome home :)"
+
+[node name="replay_button" type="TextureButton" parent="."]
+clip_contents = true
+offset_left = 1221.0
+offset_top = 815.0
+offset_right = 1971.0
+offset_bottom = 1058.0
+scale = Vector2(0.49, 0.49)
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("2_p7m4f")
+texture_pressed = ExtResource("3_p7m4f")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="replay_button"]
+layout_mode = 0
+offset_left = -108.163
+offset_top = 46.9388
+offset_right = 391.837
+offset_bottom = 115.939
+scale = Vector2(1.93, 1.93)
+mouse_filter = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 50
+text = "play again"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+
+[node name="click2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_bvfni")
+volume_db = -11.556
+pitch_scale = 0.73
+
+[node name="click" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_s4tl2")
+volume_db = -5.0
+
+[node name="replay_timer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="button_down" from="replay_button" to="." method="_on_replay_button_button_down"]
+[connection signal="finished" from="click" to="." method="_on_click_finished"]
+[connection signal="timeout" from="replay_timer" to="." method="_on_replay_timer_timeout"]
