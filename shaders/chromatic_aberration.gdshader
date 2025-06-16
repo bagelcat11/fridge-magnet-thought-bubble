@@ -21,7 +21,7 @@ void fragment()
 	//} else if (rand >= 0.6) {
 		//rand_int = 3;
 	//}
-	
+
 	float r = texture(SCREEN_TEXTURE, SCREEN_UV + vec2(SCREEN_PIXEL_SIZE*r_displacement * (mod(time, 2.0)+1.0)), 0.0).r;
 	float g = texture(SCREEN_TEXTURE, SCREEN_UV + vec2(SCREEN_PIXEL_SIZE*g_displacement), 0.0).g;
 	float b = texture(SCREEN_TEXTURE, SCREEN_UV + vec2(SCREEN_PIXEL_SIZE*b_displacement * (mod(time, 2.0)+1.0)), 0.0).b;

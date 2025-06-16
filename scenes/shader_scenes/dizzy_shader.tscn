@@ -1,0 +1,39 @@
+[gd_scene load_steps=5 format=3 uid="uid://20220esll7f4"]
+
+[ext_resource type="Shader" uid="uid://dk5p3vib1ve08" path="res://shaders/dizzy2.gdshader" id="1_26mwk"]
+[ext_resource type="Shader" uid="uid://dmghbp5p760yd" path="res://shaders/dizzy1.gdshader" id="2_qy41n"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_k25eb"]
+shader = ExtResource("1_26mwk")
+shader_parameter/fish_intensity = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_t2vq4"]
+shader = ExtResource("2_qy41n")
+shader_parameter/time_speed = 1.0
+shader_parameter/distortion_strength = 0.5
+shader_parameter/max_distortion_strength = 2.0
+shader_parameter/separation_strength = 0.5
+shader_parameter/distortion_size = 10.0
+shader_parameter/background_blur_strength = 0.0
+shader_parameter/color1 = Color(1, 0, 0, 1)
+shader_parameter/color2 = Color(0, 1, 0, 1)
+shader_parameter/color3 = Color(0, 0, 1, 1)
+shader_parameter/background_color = Color(0, 0, 0, 1)
+shader_parameter/rotation_time = 10.0
+shader_parameter/enable_rotation = true
+shader_parameter/show_text = true
+
+[node name="dizzy_shader" type="Node2D"]
+z_index = 5
+
+[node name="dizzy_2" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_k25eb")
+offset_right = 1934.0
+offset_bottom = 1105.0
+mouse_filter = 2
+
+[node name="dizzy_1" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_t2vq4")
+offset_right = 1925.0
+offset_bottom = 1096.0
+mouse_filter = 2

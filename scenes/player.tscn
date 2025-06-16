@@ -1,4 +1,4 @@
-[gd_scene load_steps=67 format=3 uid="uid://bod7r823y2ysu"]
+[gd_scene load_steps=68 format=3 uid="uid://bod7r823y2ysu"]
 
 [ext_resource type="Script" uid="uid://bh4ppn2ksqwp8" path="res://scripts/player.gd" id="1_dqkch"]
 [ext_resource type="Texture2D" uid="uid://cd8i5r6blewy3" path="res://assets/person/getting_up/Person_Getting_Up1.png" id="2_4r5pv"]
@@ -30,6 +30,7 @@
 [ext_resource type="Texture2D" uid="uid://dkrw72ll8am1s" path="res://assets/resized_forms/_0000s_0013_earth.png" id="12_h7ic4"]
 [ext_resource type="Texture2D" uid="uid://cfasqarhcn68k" path="res://assets/resized_forms/_0000s_0003_flower.png" id="13_au7lq"]
 [ext_resource type="Texture2D" uid="uid://bdamukiw4ar4e" path="res://assets/resized_forms/frog/_0000s_0027_Frog2.png" id="14_nubpm"]
+[ext_resource type="Texture2D" uid="uid://cdypupikyiipc" path="res://assets/resized_forms/couch.png" id="14_ua5cf"]
 [ext_resource type="Texture2D" uid="uid://crlm3axowc7ey" path="res://assets/person/walk/Person_Walk4.png" id="15_gl8cc"]
 [ext_resource type="Texture2D" uid="uid://d3b5agilt74gc" path="res://assets/resized_forms/frog/_0000s_0026_Frog1.png" id="15_ua5cf"]
 [ext_resource type="Texture2D" uid="uid://b24fdig4tc8ml" path="res://assets/resized_forms/frog/_0000s_0031_Frog6.png" id="16_51ujp"]
@@ -148,6 +149,14 @@ animations = [{
 }],
 "loop": true,
 "name": &"chair",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("14_ua5cf")
+}],
+"loop": true,
+"name": &"couch",
 "speed": 5.0
 }, {
 "frames": [{
@@ -435,7 +444,7 @@ script = ExtResource("1_dqkch")
 
 [node name="forms" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_smehm")
-animation = &"person_standing"
+animation = &"couch"
 
 [node name="hop_animator" type="AnimationPlayer" parent="."]
 libraries = {

@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://0e57i1qgx2ys"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_uj2st"]
+blend_mode = 3
+
+[node name="sad_shader" type="Node2D"]
+z_index = 5
+
+[node name="sad" type="ColorRect" parent="."]
+material = SubResource("CanvasItemMaterial_uj2st")
+offset_right = 1920.0
+offset_bottom = 1080.0
+mouse_filter = 2
+color = Color(0.537451, 0.723341, 0.896306, 1)

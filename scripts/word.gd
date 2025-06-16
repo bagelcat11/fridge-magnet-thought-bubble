@@ -2,7 +2,7 @@ extends Node2D
 
 # implicit opposite: isFeeling
 var isObject
-var chanceForObject = 0.1
+var chanceForObject = 0.6
 var rng = RandomNumberGenerator.new()
 
 var myAttributes = []
